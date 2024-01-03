@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une categorie{% endblock %}
+
+{% block body %}
+
+{% if edit %}
+<h1>Editer une categorie</h1>
+    
+{% else %}
+<h1>Ajouter une categorie</h1>
+
+{% endif %}
+
+{{ form_start(formAddCategory) }}
+<div class="row">
+        {{ form_row(formAddCategory.nameCategory) }}
+        {#{{ form_row(formAddCategory.dateDeCreation) }}#}
+        {#<div class="col-sm">
+            {{ form_row(formAddCategory.adresse) }}
+        </div>#}
+        {#<div class="col-sm">
+            {{ form_row(formAddCategory.cp) }}
+        </div>#}
+        {#<div class="col-sm">
+            {{ form_row(formAddCategory.ville) }}
+        </div>#}
+</div>
+
+
+
+{{ form_end(formAddCategory) }}
+{# {{ form(formAddEntreprise) }} #}
+
+{% endblock %}

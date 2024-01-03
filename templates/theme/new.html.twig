@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un theme{% endblock %}
+
+{% block body %}
+
+{% if edit %}
+<h1>Editer un theme</h1>
+    
+{% else %}
+<h1>Ajouter un theme</h1>
+
+{% endif %}
+
+{{ form_start(formAddTheme) }}
+<div class="row">
+        {{ form_row(formAddTheme.title) }}
+        {{ form_row(formAddTheme.dateDeCreation) }}
+        {#<div class="col-sm">
+            {{ form_row(formAddtheme.adresse) }}
+        </div>#}
+        {#<div class="col-sm">
+            {{ form_row(formAddTheme.cp) }}
+        </div>#}
+        {#<div class="col-sm">
+            {{ form_row(formAddTheme.ville) }}
+        </div>#}
+</div>
+
+
+
+{{ form_end(formAddTheme) }}
+{# {{ form(formAddTheme) }} #}
+
+{% endblock %}
