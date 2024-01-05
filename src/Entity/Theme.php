@@ -31,7 +31,6 @@ class Theme
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Picture $pictures = null;
 
     public function __construct()
     {
@@ -112,17 +111,5 @@ class Theme
     public function __toString()
     {
         return $this->title;
-    }
-
-    public function getPictures(): ?Picture
-    {
-        return $this->pictures;
-    }
-
-    public function setPictures(Picture $pictures): static
-    {
-        $this->pictures = $pictures;
-
-        return $this;
     }
 }

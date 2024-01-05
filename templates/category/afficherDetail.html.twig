@@ -1,28 +1,24 @@
-{% block title %}Detail d'une categorie{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-{#<h1>Detail d'une categorie</h1>#}
+<h1>Detail d'une categorie</h1>
 
 {#<h2>{{ category }}</h2>#}
 
 {% if category.themes | length > 0 %}
-    <table class="table table-striped">
-        {#<thead>
-            <tr>
-                <th>theme</th>
-            </tr>
-        </thead>#}
-        <tbody>
-            {# on va recuperer la collection que l'on veut dans l'entité de l'category (category.php) du coup nous faison category.(nomm de la collection) #}
-            {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
-            {% for theme in category.themes %}
-            <tr><td><a href=" {{ path('afficherDetail_theme', {'id' :theme.id}) }}">{{ theme }} </a></td></tr><br>
-            {% endfor %}
-        </tbody>
-    </table>
+
+
+{% for theme in category.themes %}
+
+    <a href=" {{ path('afficherDetail_theme', {'id' :theme.id}) }}">{{ theme }} </a><br>
+
+{% endfor %}
+   
     
     {% else %}
         <p>Il n'y a aucun theme dans cette categorie </p>
     {% endif %}
+
+    <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un thème</a><br>
    
 {% endblock %}

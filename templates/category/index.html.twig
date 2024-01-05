@@ -1,39 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Liste des categories{% endblock %}
 
 {% block body %}
-<h1></h1>
+<h1> </h1>
 
-<table class="table table-hover table-responsive">
-    <thead class="thead-dark">
-        <tr>
-            <th>Nom</th>
-            <th>Editer</th>
-            <th>Supprimer</th>
-        </tr>
-    </thead>
-
-    <tbody>
+<section class="index_category">
+    <nav class="index_category_nav">
         {% for category in categories %}
-        <tr>
-            <td>
+        <ul>
+            <li class="category_nav">
                 {# {{...}} correspond a l'echo en symfony #}
-                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans category.php #}
-                <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a>     ({{ category.nameCategory}})
-            </td>
+                {# .raisonSociale va appeler le Getter de raison social que l'on reulouve dans category.php #}
+                <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a> 
+            </li>
             <td>
                 <a href=" {{ path('edit_category', {'id' : category.id}) }}" class="btn btn-warning">Edit</a>
             </td>
             <td>
                 <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="btn btn-danger">Supp</a>
             </td>
-        </tr>          
+        </ul>          
             
             {% endfor %}
         
-    </tbody>
-</table>
+    </nav>
+</section>
 
 <a href="{{path('add_category')}}" class="btn btn-success">Ajouter une categorie</a>
 

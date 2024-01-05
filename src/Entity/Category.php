@@ -23,7 +23,6 @@ class Category
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Picture $pictures = null;
 
     public function __construct()
     {
@@ -80,17 +79,5 @@ class Category
     public function __toString()
     {
         return $this->nameCategory;
-    }
-
-    public function getPictures(): ?Picture
-    {
-        return $this->pictures;
-    }
-
-    public function setPictures(Picture $pictures): static
-    {
-        $this->pictures = $pictures;
-
-        return $this;
     }
 }

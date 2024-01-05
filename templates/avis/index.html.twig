@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des avis!{% endblock %}
+
+{% block body %}
+
+<h1>List des avis</h1>
+
+{% for avis in avis %}
+        <tr>
+            <td>
+                {# {{...}} correspond a l'echo en symfony #}
+                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans avis.php #}
+                <a href="{{ path('afficherDetail_avis', {'id': avis.id}) }}">{{ app_avis }}</a>  
+            </td>
+            <td>
+                <a href=" {{ path('edit_avis', {'id' : avis.id}) }}" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <a href=" {{ path('delete_avis', {'id' :avis.id}) }}" class="btn btn-danger">Supp</a>
+            </td>
+        </tr>          
+            
+            {% endfor %}
+{% endblock %}

@@ -1,9 +1,9 @@
-{% block title %}Detail d'un theme{% endblock %}
+{% block title %}Detail d'un event{% endblock %}
 
 {% block body %}
-<h1>Detail d'un theme</h1>
+<h1>Detail d'un event</h1>
 
-{% if theme.events | length > 0 %}
+{% if event.events | length > 0 %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,18 +11,18 @@
             </tr>
         </thead>
         <tbody>
-            {# on va recuperer la collection que l'on veut dans l'entité de l'theme (theme.php) du coup nous faison theme.(nomm de la collection) #}
+            {# on va recuperer la collection que l'on veut dans l'entité de l'event (event.php) du coup nous faison event.(nomm de la collection) #}
             {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
-            {% for event in theme.events %}
+            {% for event in event.events %}
             <tr><td><a href=" {{ path('afficherDetail_event', {'id' :event.id}) }}">{{ event }} </a></td></tr><br>
             {% endfor %}
         </tbody>
     </table>
     
     {% else %}
-        <p>Il n'a aucun event dans ce theme </p>
+        <p>Il n'a aucun event dans ce event </p>
     {% endif %}
+<a href="{{path('add_event', {'event_id': event.id})}}" type="button" class="btn btn-success">Ajouter un evenement</a><br>
 
-    <a href="{{ path('add_event', {'theme_id': theme.id}) }}" type="button" class="btn btn-success">Ajouter un événement</a><br>
    
 {% endblock %}

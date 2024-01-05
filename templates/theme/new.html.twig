@@ -14,17 +14,10 @@
 
 {{ form_start(formAddTheme) }}
 <div class="row">
+        {{ form_row(formAddTheme.category) }}
         {{ form_row(formAddTheme.title) }}
         {{ form_row(formAddTheme.dateDeCreation) }}
-        {#<div class="col-sm">
-            {{ form_row(formAddtheme.adresse) }}
-        </div>#}
-        {#<div class="col-sm">
-            {{ form_row(formAddTheme.cp) }}
-        </div>#}
-        {#<div class="col-sm">
-            {{ form_row(formAddTheme.ville) }}
-        </div>#}
+        
 </div>
 
 

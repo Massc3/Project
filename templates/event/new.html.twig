@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un event{% endblock %}
+
+{% block body %}
+
+{% if edit %}
+<h1>Editer un event</h1>
+    
+{% else %}
+<h1>Ajouter un event</h1>
+
+{% endif %}
+
+{{ form_start(formAddEvent) }}
+<div class="row">
+        {{ form_row(formAddEvent.theme) }}
+        {{ form_row(formAddEvent.description) }}
+        {{ form_row(formAddEvent.dateDebut) }}
+        {{ form_row(formAddEvent.dateFin) }}
+        {{ form_row(formAddEvent.note) }}
+
+</div>
+
+
+
+{{ form_end(formAddEvent) }}
+{# {{ form(formAddevent) }} #}
+
+{% endblock %}

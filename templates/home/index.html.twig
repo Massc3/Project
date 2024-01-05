@@ -5,4 +5,58 @@
 {% block body %}
 
 
+<section id="category-nav-home-page">
+    {% for category in categories %}
+    <ul class="nav-home-page">
+        <li class="category_nav">
+            {# {{...}} correspond a l'echo en symfony #}
+            {# .raisonSociale va appeler le Getter de raison social que l'on reulouve dans category.php #}
+            <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a> 
+        </li>
+        <td>
+            <a href=" {{ path('edit_category', {'id' : category.id}) }}" class="btn btn-warning">Edit</a>
+        </td>
+        <td>
+            <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="btn btn-danger">Supp</a>
+        </td>
+    </ul>          
+    
+     {% endfor %}
+</section>
+<section id="home-header"
+    <figure>
+        <h1>Lumee</h1>
+        <img src="/public/img/banniere.jpg" alt="image d'acceuil">
+    </figure>
+</section>
+<section id="main-home-page">
+    <main>
+        <h2 class="title-event-home">Last Event</h2>
+    </main>
+</section>
+<section id="card-home-page">
+    {% for event in lastEvents %}
+    <div id="card-home-page-event">
+        <p>{{ event.description }}</p>
+        {# <p>{{ event.dateCreation | date('Y-m-d') }}</p> #}
+        <!-- Autres informations de l'événement à afficher -->
+        <a href="{{ path('edit_event', {'id': event.id}) }}" class="btn btn-warning">Edit</a>
+    </div>
+{% endfor %}
+
+</section>
+<section id="comment-home-page">
+    <h2 class="title-commentaire-home">Commentaires</h2> 
+    <div class="card-home-avis">
+        {% for avis in lastAvis %}
+            <div id="card-home-page-avis">
+                <p>{{ avis.text }}</p>
+                <p>{{ avis.dateCommentaire | date('Y-m-d') }}</p>
+                <!-- Autres informations de l'événement à afficher -->
+                <a href="{{ path('edit_avis', {'id': avis.id}) }}" class="btn btn-warning">Edit</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
 {% endblock %}

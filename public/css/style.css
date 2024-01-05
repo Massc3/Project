@@ -1,13 +1,128 @@
+/****************GENERAL******************/
+
+
+
+
+
+/*************Base.Html*******************/
+
+#title_base{
+    text-align: center;
+}
+#title_base a{
+    text-decoration: none;
+    color: black;
+}
+
+
 #home-header {
+    min-height: 50vh;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 35px;
+    background-color: #750a6b;
+    color: white;
 }
 
 #img-header{
     object-fit: cover;
     object-position: 50% 50%;
     padding: 50px;
+}
+
+.theme{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/**************CATEGORY*************/
+.index_category_nav{
+display: flex;
+}
+.category_nav{
+    list-style: none;
+}
+.category_nav a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.2em;
+}
+.category_nav{
+    border-style: ridge;
+    border-color: black;
+    border-width: thin;
+    border-radius: 5px;
+    padding: 10px;
+}
+.index_category{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/********************HOME PAGE*******************/
+
+#category-nav-home-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nav-home-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title-event-home{
+    text-align: center;
+}
+
+/**********************CARD PAGE D'ACCEUIL**************/
+
+#card-home-page{
+    min-height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20;
+    justify-content: space-around;
+    align-content: space-evenly;
+}
+
+#card-home-page-event{
+    float: left;
+    width: 25%;
+    /* padding: 0 10px; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+    background-image: radial-gradient(#8bc3f5 , #1294b8);
+}
+
+/****************COMMENTAIRES************/
+
+.title-commentaire-home{
+    text-align: center;
+
+}
+#comment-home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-home-page{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 20;
+}
+#card-home-page-avis{
+    border-style: ridge;
+    border-color: black;
+    border-width: thin;
+    border-radius: 5px;
+    padding: 10px;
 }

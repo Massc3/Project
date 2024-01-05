@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!{% endblock %}
+
+{% block body %}
+<h1>List des event</h1>
+
+{% for event in events %}
+        <tr>
+            <td>
+                {# {{...}} correspond a l'echo en symfony #}
+                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans event.php #}
+                <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">{{ app_event }}</a>  
+            </td>
+            <td>
+                <a href=" {{ path('edit_event', {'id' : event.id}) }}" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <a href=" {{ path('delete_event', {'id' :event.id}) }}" class="btn btn-danger">Supp</a>
+            </td>
+        </tr>          
+            
+            {% endfor %}
+{% endblock %}
