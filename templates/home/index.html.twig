@@ -5,58 +5,103 @@
 {% block body %}
 
 
-<section id="category-nav-home-page">
-    {% for category in categories %}
-    <ul class="nav-home-page">
-        <li class="category_nav">
-            {# {{...}} correspond a l'echo en symfony #}
-            {# .raisonSociale va appeler le Getter de raison social que l'on reulouve dans category.php #}
-            <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a> 
-        </li>
-        <td>
-            <a href=" {{ path('edit_category', {'id' : category.id}) }}" class="btn btn-warning">Edit</a>
-        </td>
-        <td>
-            <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="btn btn-danger">Supp</a>
-        </td>
-    </ul>          
-    
-     {% endfor %}
-</section>
-<section id="home-header"
-    <figure>
-        <h1>Lumee</h1>
-        <img src="/public/img/banniere.jpg" alt="image d'acceuil">
-    </figure>
-</section>
-<section id="main-home-page">
-    <main>
-        <h2 class="title-event-home">Last Event</h2>
-    </main>
-</section>
-<section id="card-home-page">
-    {% for event in lastEvents %}
-    <div id="card-home-page-event">
-        <p>{{ event.description }}</p>
-        {# <p>{{ event.dateCreation | date('Y-m-d') }}</p> #}
-        <!-- Autres informations de l'événement à afficher -->
-        <a href="{{ path('edit_event', {'id': event.id}) }}" class="btn btn-warning">Edit</a>
-    </div>
-{% endfor %}
-
-</section>
-<section id="comment-home-page">
-    <h2 class="title-commentaire-home">Commentaires</h2> 
-    <div class="card-home-avis">
-        {% for avis in lastAvis %}
-            <div id="card-home-page-avis">
-                <p>{{ avis.text }}</p>
-                <p>{{ avis.dateCommentaire | date('Y-m-d') }}</p>
-                <!-- Autres informations de l'événement à afficher -->
-                <a href="{{ path('edit_avis', {'id': avis.id}) }}" class="btn btn-warning">Edit</a>
-            </div>
+    <section id="category-nav-home-page">
+        {% for category in categories %}
+        <ul class="nav-home-page">
+            <li class="category_nav">
+                {# {{...}} correspond a l'echo en symfony #}
+                {# .raisonSociale va appeler le Getter de raison social que l'on reulouve dans category.php #}
+                <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a> 
+            </li>
+            <td>
+                <a href=" {{ path('edit_category', {'id' : category.id}) }}" class="">Edit</a>
+            </td>
+            <td>
+                <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="">Supp</a>
+            </td>
+        </ul>   
+        
+        
         {% endfor %}
-    </div>
-</section>
+        
+    </section>
+    <section id="home-header"
+        <figure>
+            {# <h1>Lumee</h1> #}
+            <img src="img/banniere.jpg" alt="image d'acceuil">
+        </figure>
+    </section>
+    <section id="title-home-page-main">
+        <div id="main-home-page">
+            <h2 class="title-event-home">Last Event</h2>
+        </div>
+        <section id="card-home-page">
+            {% for event in lastEvents %}
+            <div id="card-home-page-event">
+                <figure>
+                    {# <img src="{{app_picture}}" alt=""> #}
+                </figure>
+                <figcaption>{{ event.description }}</figcaption>
+                {# <p>{{ event.dateCreation | date('Y-m-d') }}</p> #}
+                <!-- Autres informations de l'événement à afficher -->
+                <p>nombre de participant/ like/ dislike/ participer </p>
+                <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
+            </div>
+            {% endfor %}
+        </section>
+    </section>
+    <section id="parallax">
+        <div class="parallax-block">
+            <h2>Lance toi dans de nouvelles aventures</h2>
+            <p> Tout(e) seul(e) ou accompagné inscris toi vite à une activitée pres de chez toi. Et viens rencontrer tes nouveaux amis.</p>
+            <a href="#">Let's Go</a>
+        </div>
+    </section>
+    <section id="comment-home-page">
+        <h2 class="title-commentaire-home">Commentaires</h2> 
+        <div class="card-home-avis">
+            {% for avis in lastAvis %}
+                <div id="card-home-page-avis">
+                    <p>{{ avis.text }}</p>
+                    <p>{{ avis.dateCommentaire | date('Y-m-d') }}</p>
+                    <!-- Autres informations de l'événement à afficher -->
+                    <a href="{{ path('edit_avis', {'id': avis.id}) }}" class="">Edit</a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section>
+        <footer>
+            <div class="footer">
+                <div class="information-footer">
+                    <p>A propos de</p>
+                    <p>Mention legale</p>
+                    <p>Protections des donées</p>
+                    <p>S’inscrire à la newsletter</p>
+                    <p>L’application Luma Lee</p>
+                    <p>Conditions générales</p>
+                </div>
+                <div class="text-footer">
+                    <span>
+                        Bienvenue sur le site officiel <strong>Lumee.T</strong>, venez decouvrir toute l'actu sur les activités à faire pas loin de chez vous. 
+                    </span>
+                    <a href="#">Contactez-nous pour plus d'information</a> 
+                </div>
+                <div class="icons-footer">
+                    <form action="footer-icons">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-linkedin"></i>
+                        <i class="fa-brands fa-google-plus"></i>
+                    </form>
+                </div>
+            </div>
+            <div class="terms-footer">
+                <a href="">Terms & Condition </a>| <a href="">Privacy Policy </a>| <a href="">Conctact Us</a>
+                <small>sitemap | 2023 Lumee - Lumee.T Page Template by Massou</small>
+            </div>
+        </footer>
+    </section>
 
 {% endblock %}

@@ -39,6 +39,9 @@ class Event
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateCreation = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Picture $picture = null;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
@@ -152,6 +155,18 @@ class Event
     public function setDateCreation(?\DateTimeInterface $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?Picture $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }

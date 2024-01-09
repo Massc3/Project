@@ -14,6 +14,7 @@
 
 {{ form_start(formAddEvent) }}
 <div class="row">
+        {{ form_row(formAddEvent.images) }}
         {{ form_row(formAddEvent.theme) }}
         {{ form_row(formAddEvent.description) }}
         {{ form_row(formAddEvent.dateDebut) }}
@@ -21,6 +22,7 @@
         {{ form_row(formAddEvent.note) }}
 
 </div>
+<button type="submit">{{button_label|default('default value')('publier')}}</button>
 
 
 

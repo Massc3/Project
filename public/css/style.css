@@ -1,27 +1,66 @@
 /****************GENERAL******************/
 
-
-
-
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#main-content {
+    display: flex;
+    flex-direction: column;
+}
 
 /*************Base.Html*******************/
 
 #title_base{
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px 0 30px;
+}
+#title_base h1{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 #title_base a{
     text-decoration: none;
     color: black;
+    border-style: ridge;
+    border-color: black;
+    border-width: thin;
+    border-radius: 5px;
+    padding: 14px;
+}
+#title_base ul{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    gap: 5%;
+    flex-direction: row;
+}
+
+#title_base li{
+    list-style: none;
+    
 }
 
 
 #home-header {
+    height: 400px;
     min-height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #750a6b;
+    background: rgb(116,165,206);
+    background: linear-gradient(4deg, rgba(116,165,206,1) 0%, rgba(201,142,196,1) 41%, rgba(22,81,135,1) 100%);
     color: white;
+}
+
+#home-header img{
+    object-fit: cover;
+    object-position: 50% 50%;
+    height: 100%;
+    width: 100%;
 }
 
 #img-header{
@@ -47,13 +86,14 @@ display: flex;
     text-decoration: none;
     color: black;
     font-size: 1.2em;
-}
-.category_nav{
     border-style: ridge;
     border-color: black;
     border-width: thin;
     border-radius: 5px;
     padding: 10px;
+}
+.category_nav{
+       padding: 10px;
 }
 .index_category{
     display: flex;
@@ -67,6 +107,8 @@ display: flex;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    min-height: 20vh;
+    align-items: center;
 }
 
 .nav-home-page{
@@ -81,13 +123,18 @@ display: flex;
 
 /**********************CARD PAGE D'ACCEUIL**************/
 
+#title-home-page-main{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 20px 0;
+}
 #card-home-page{
-    min-height: 80vh;
+    min-height: 50vh;
+    margin: 30px 0 30px 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 20;
-    justify-content: space-around;
-    align-content: space-evenly;
+    justify-content: space-evenly;
+    align-content: space-between;
 }
 
 #card-home-page-event{
@@ -112,11 +159,16 @@ display: flex;
     flex-direction: column;
     align-items: center;
 }
+.card-home-avis{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 30px;
+}
 
 .card-home-page{
     display: flex;
     flex-direction: column;
-    width: 70%;
     gap: 20;
 }
 #card-home-page-avis{
@@ -125,4 +177,110 @@ display: flex;
     border-width: thin;
     border-radius: 5px;
     padding: 10px;
+}
+
+/**********************PARALLAX***********************/
+
+#parallax {
+    background-image: url("/img/parallax.jpg");
+    display: flex;
+    justify-content: center;
+    min-height: 400px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#parallax img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    height: 100%;
+    width: 100%
+}
+.parallax-block {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    gap: 20px;
+}
+.parallax-block button {
+    padding: 10px;
+    width: 13%;
+    font-size: 1.2em;
+    border-style: ridge;
+    border-color: black;
+    color: black;
+    border-radius: 11px;
+    background: rgba(0, 0, 0, 0.0);
+}
+.parallax-block p {
+    font-size: 1.2em;
+}
+
+
+/***********************FOOTER******************/
+
+footer{
+    background-color: #282828;
+
+}
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-image: url("/img/footer.jpg");
+    /* background: linear-gradient(4deg, rgba(12,2,35,1) 0%, rgba(24,23,73,1) 41%, rgba(60,125,184,1) 100%); */
+    color: white;
+    padding: 50px 0px 20px 0px;
+}
+.text-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.text-footer a{
+    text-decoration: none;
+    color: violet;
+}
+
+small{
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: #282828;
+}
+.terms-footer{
+    text-align: center;
+    background-color: #282828;
+    color: white;
+}
+.terms-footer a{
+    color: violet;
+}
+
+.information-footer{
+    border-style: ridge;
+    border-color: black;
+    border-width: thin;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+/*************************DETAIL CATEGORY******************/
+
+#detail-theme-category{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#detail-theme-category a{
+    text-decoration: none;
+    color: black;
+    border: solid;
 }

@@ -8,6 +8,9 @@
 {% for event in events %}
         <tr>
             <td>
+                {{image.event}}
+            </td>
+            <td>
                 {# {{...}} correspond a l'echo en symfony #}
                 {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans event.php #}
                 <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">{{ app_event }}</a>  

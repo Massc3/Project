@@ -3,31 +3,37 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     #[ORM\Column(length: 50)]
     private ?string $pseudo = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $password = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateInscription = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?array $role = null;
 
     public function getId(): ?int
     {
@@ -46,19 +52,39 @@ class User
         return $this;
     }
 
-    public function getPseudo(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->pseudo;
+        return (string) $this->email;
     }
 
-    public function setPseudo(string $pseudo): static
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->pseudo = $pseudo;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -70,26 +96,35 @@ class User
         return $this;
     }
 
-    public function getDateInscription(): ?\DateTimeInterface
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
     {
-        return $this->dateInscription;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    public function isVerified(): bool
     {
-        $this->dateInscription = $dateInscription;
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
 
-    public function getRole(): ?array
+    public function getPseudo(): ?string
     {
-        return $this->role;
+        return $this->pseudo;
     }
 
-    public function setRole(?array $role): static
+    public function setPseudo(string $pseudo): static
     {
-        $this->role = $role;
+        $this->pseudo = $pseudo;
 
         return $this;
     }

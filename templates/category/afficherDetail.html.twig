@@ -1,24 +1,25 @@
-{% block title %}{% endblock %}
+{% block title %}Detail d'une categorie{% endblock %}
 
 {% block body %}
-<h1>Detail d'une categorie</h1>
+<h1>Voici les different themes de la categorie</h1>
 
 {#<h2>{{ category }}</h2>#}
 
 {% if category.themes | length > 0 %}
 
+<div id="detail-theme-category">
 
 {% for theme in category.themes %}
-
     <a href=" {{ path('afficherDetail_theme', {'id' :theme.id}) }}">{{ theme }} </a><br>
-
-{% endfor %}
-   
+    
+    {% endfor %}
+    
     
     {% else %}
-        <p>Il n'y a aucun theme dans cette categorie </p>
+    <p>Il n'y a aucun theme dans cette categorie </p>
     {% endif %}
-
-    <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un thème</a><br>
+    
+    <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
+</div>
    
 {% endblock %}

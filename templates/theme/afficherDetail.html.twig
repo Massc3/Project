@@ -4,6 +4,8 @@
 <h1>Detail d'un theme</h1>
 
 {% if theme.events | length > 0 %}
+<div id="">
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -23,6 +25,7 @@
         <p>Il n'a aucun event dans ce theme </p>
     {% endif %}
 
-    <a href="{{ path('add_event', {'theme_id': theme.id}) }}" type="button" class="btn btn-success">Ajouter un événement</a><br>
+    <a href="{{ path('add_event', {'theme_id': theme.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
    
+</div>
 {% endblock %}
