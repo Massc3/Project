@@ -38,9 +38,18 @@
         <section id="card-home-page">
             {% for event in lastEvents %}
             <div id="card-home-page-event">
+                {% if event.picture is defined %}
                 <figure>
-                    {# <img src="{{app_picture}}" alt=""> #}
+                    
+                    <img src="{{asset('img/' ~ event.picture)}}" alt="{{event.description}}" width="200" height="200">
                 </figure>
+                {% else %}
+                <figure>
+                    
+                    <img src="{{asset('img/defaul.png')}}" alt="image event par default" width="200" height="200">
+                </figure>
+                {% endif %}
+                    {# <img src="{{app_picture}}" alt=""> #}
                 <figcaption>{{ event.description }}</figcaption>
                 {# <p>{{ event.dateCreation | date('Y-m-d') }}</p> #}
                 <!-- Autres informations de l'événement à afficher -->

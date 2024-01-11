@@ -41,7 +41,8 @@ class ThemeType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-sucess'
                 ]
-            ]);
+            ])
+        ;    
     }
 
     public function configureOptions(OptionsResolver $resolver): void

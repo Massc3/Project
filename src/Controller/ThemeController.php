@@ -26,18 +26,6 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    // #[Route('/theme/new', name: 'add_theme')]
-
-    // public function add(Request $request): Response
-    // {
-    //     $theme = new theme();
-
-    //     $form = $this->createForm(themeType::class, $theme);
-
-    //     return $this->render('theme/new.html.twig', [
-    //         'formAddtheme' => $form,
-    //     ]);
-    // }
     #[Route('/theme/new', name: 'add_theme')]
     #[Route('/theme/{id}/edit', name: 'edit_theme')]
     public function new_edit(Theme $theme = null, Request $request, EntityManagerInterface $entityManager): Response
@@ -46,7 +34,7 @@ class ThemeController extends AbstractController
         if (!$theme) {
             $theme = new Theme();
         }
-
+        // dd($theme->getTitle());
 
         // on creer le formulaire a partir de themeType
         $form = $this->createForm(ThemeType::class, $theme);

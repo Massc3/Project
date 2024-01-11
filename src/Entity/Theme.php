@@ -29,8 +29,6 @@ class Theme
     #[ORM\OneToMany(mappedBy: 'theme', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $events;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Picture $picture = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -114,17 +112,5 @@ class Theme
     public function __toString()
     {
         return $this->title;
-    }
-
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(?Picture $picture): static
-    {
-        $this->picture = $picture;
-
-        return $this;
     }
 }

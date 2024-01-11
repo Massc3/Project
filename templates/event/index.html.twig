@@ -8,20 +8,34 @@
 {% for event in events %}
         <tr>
             <td>
-                {{image.event}}
+                {% if event.picture is defined %}
+                <figure>
+                    
+                    <img src="{{asset('img/' ~ event.picture)}}" alt="{{event.description}}" width="500" height="500">
+                </figure>
+                {% else %}
+                <figure>
+                    
+                    <img src="{{asset('img/parc.jpg')}}" alt="image event par default" width="200" height="200">
+                </figure>
+                {% endif %}
             </td>
             <td>
                 {# {{...}} correspond a l'echo en symfony #}
                 {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans event.php #}
-                <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">{{ app_event }}</a>  
+                <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">{{ event.description }}</a>  
             </td>
             <td>
-                <a href=" {{ path('edit_event', {'id' : event.id}) }}" class="btn btn-warning">Edit</a>
+                <a href=" {{ path('edit_event', {'id': event.id}) }}" class="btn btn-warning">Edit</a>
+                
             </td>
-            <td>
+            {# <td>
                 <a href=" {{ path('delete_event', {'id' :event.id}) }}" class="btn btn-danger">Supp</a>
-            </td>
+            </td> #}
         </tr>          
-            
-            {% endfor %}
+        
+        {# <a href="{{path('add_event', {'id' : event.theme.id}) }}">ajouter un event</a> #}
+        {% endfor %}
+
+
 {% endblock %}

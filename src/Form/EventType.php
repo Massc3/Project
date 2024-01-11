@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -51,7 +52,13 @@ class EventType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-sucess'
                 ]
-            ]);
+            ])
+            ->add('picture', FileType::class, [
+                    'label' => 'Image',
+                    'mapped' => false,
+                    'required' => false   
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

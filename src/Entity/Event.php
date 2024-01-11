@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -39,8 +41,8 @@ class Event
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateCreation = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Picture $picture = null;
+    #[ORM\Column(nullable: true)]
+    private ?string $picture;
 
     public function __construct()
     {
@@ -144,7 +146,7 @@ class Event
     }
     public function __toString()
     {
-        return $this->description;
+        return $this->description. $this->picture;
     }
 
     public function getDateCreation(): ?\DateTimeInterface
@@ -159,15 +161,24 @@ class Event
         return $this;
     }
 
-    public function getPicture(): ?Picture
+    /**
+     * Get the value of picture
+     */
+    public function getPicture()
     {
         return $this->picture;
     }
 
-    public function setPicture(?Picture $picture): static
+    /**
+     * Set the value of picture
+     *
+     * @return  self
+     */
+    public function setPicture($picture): static
     {
         $this->picture = $picture;
 
         return $this;
     }
+
 }

@@ -129,7 +129,7 @@ display: flex;
     margin: 20px 0 20px 0;
 }
 #card-home-page{
-    min-height: 50vh;
+    min-height: 100vh;
     margin: 30px 0 30px 0;
     display: flex;
     flex-wrap: wrap;
@@ -145,7 +145,6 @@ display: flex;
     padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
-    background-image: radial-gradient(#8bc3f5 , #1294b8);
 }
 
 /****************COMMENTAIRES************/
