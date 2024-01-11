@@ -1,23 +1,19 @@
+{% extends 'base.html.twig' %}
+
 {% block title %}Detail d'un event{% endblock %}
 
 {% block body %}
-<h1>Detail d'un event</h1>
+<h1>{{event.description}}</h1>
 
 {% if event | length > 0 %}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>event</th>
-            </tr>
-        </thead>
-        <tbody>
+    
             {# on va recuperer la collection que l'on veut dans l'entité de l'event (event.php) du coup nous faison event.(nomm de la collection) #}
             {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
-            <tr><td><a href=" {{ path('afficherDetail_event', {'id' :event.id}) }}">{{ event }} </a></td></tr><br>
+           <h3><a href=" {{ path('afficherDetail_event', {'id' :event.id}) }}">{{ event }} </a></h3> 
             
-        </tbody>
-    </table>
-    <img src="{{asset('img/' ~ event.picture.image)}}" alt="" width="200" height="200">
+     
+
+    <img src="{{asset('img/' ~ event.picture)}}" alt="" width="200" height="200">
     
     {% else %}
         <p>Il n'a aucun event dans ce event </p>

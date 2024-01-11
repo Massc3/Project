@@ -1,25 +1,27 @@
+{% extends 'base.html.twig' %}
+
 {% block title %}Detail d'une categorie{% endblock %}
 
 {% block body %}
-<h1>Voici les different themes de la categorie</h1>
 
-{#<h2>{{ category }}</h2>#}
+<h1 id="title-detail-category">{{category.nameCategory}}</h1>
+
 
 {% if category.themes | length > 0 %}
 
-<div id="detail-theme-category">
+    <section id="detail-theme-category">
 
-{% for theme in category.themes %}
-    <a href=" {{ path('afficherDetail_theme', {'id' :theme.id}) }}">{{ theme }} </a><br>
-    
-    {% endfor %}
-    
-    
-    {% else %}
-    <p>Il n'y a aucun theme dans cette categorie </p>
-    {% endif %}
-    
-    <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
-</div>
-   
+    {% for theme in category.themes %}
+        <a href=" {{ path('afficherDetail_theme', {'id' :theme.id}) }}">{{ theme }} </a><br>
+        
+        {% endfor %}
+        
+        
+        {% else %}
+        <p>Il n'y a aucun theme dans cette categorie </p>
+        {% endif %}
+        
+        <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
+        
+    </section>
 {% endblock %}

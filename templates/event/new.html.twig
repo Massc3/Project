@@ -14,11 +14,16 @@
 
 {{ form_start(formAddEvent) }}
 <div class="row">
-        {{ form_row(formAddEvent.picture) }}
-        {{ form_row(formAddEvent.theme) }}
-        {{ form_row(formAddEvent.description) }}
-        {{ form_row(formAddEvent.dateDebut) }}
-        {{ form_row(formAddEvent.dateFin) }}
+        <figure>
+                {{ form_row(formAddEvent.picture) }}
+        </figure>
+        <div>
+                {{ form_row(formAddEvent.theme) }}
+                {{ form_row(formAddEvent.description) }}
+        </div>
+        <label for="date de debut">{{ form_row(formAddEvent.dateDebut) }}</label>
+        <label for="date de debut">{{ form_row(formAddEvent.dateFin) }}</label>
+
         {{ form_row(formAddEvent.note) }}
 
 </div>

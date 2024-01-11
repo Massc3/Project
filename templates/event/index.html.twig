@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EventController!{% endblock %}
+{% block title %}Events!{% endblock %}
 
 {% block body %}
 <h1>List des event</h1>
@@ -10,7 +10,6 @@
             <td>
                 {% if event.picture is defined %}
                 <figure>
-                    
                     <img src="{{asset('img/' ~ event.picture)}}" alt="{{event.description}}" width="500" height="500">
                 </figure>
                 {% else %}
