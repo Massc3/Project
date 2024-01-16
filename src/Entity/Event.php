@@ -44,10 +44,19 @@ class Event
     #[ORM\Column(nullable: true)]
     private ?string $picture;
 
+    #[ORM\ManyToOne(inversedBy: 'event')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'participant')]
+    private Collection $participants;
+
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
         $this->dateCreation = new DateTime();
+        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,4 +190,42 @@ class Event
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(User $participant): static
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants->add($participant);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(User $participant): static
+    {
+        $this->participants->removeElement($participant);
+
+        return $this;
+    }
+
+
+  
 }

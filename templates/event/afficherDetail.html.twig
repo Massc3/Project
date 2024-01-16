@@ -11,9 +11,10 @@
             {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
            <h3><a href=" {{ path('afficherDetail_event', {'id' :event.id}) }}">{{ event }} </a></h3> 
             
-     
+     <figure class="event-theme-detail">
+         <img src="{{asset('img/' ~ event.picture)}}" alt="" width="200" height="200">
+     </figure>
 
-    <img src="{{asset('img/' ~ event.picture)}}" alt="" width="200" height="200">
     
     {% else %}
         <p>Il n'a aucun event dans ce event </p>

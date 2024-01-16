@@ -19,7 +19,40 @@
 title{
     text-align: center;
 }
+/***************************PARTIALS**************************/
 
+#nav-constant{
+    display: flex;
+    flex-direction: row;
+    padding: 0 30px 0 30px;
+}
+#nav-constant h1{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#nav-constant img{
+    width: 85px;
+}
+#nav-constant a{
+    text-decoration: none;
+    color: black;
+    margin: 5px 0 5px 0;
+}
+#nav-constant ul{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    gap: 5%;
+    flex-direction: row;
+}
+
+#nav-constant li{
+    list-style: none;
+    
+}
 /*************Base.Html*******************/
 
 #title_base{
@@ -55,23 +88,40 @@ title{
     
 }
 
-
 #home-header {
-    height: 400px;
-    min-height: 85vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(116,165,206);
-    background: linear-gradient(4deg, rgba(116,165,206,1) 0%, rgba(201,142,196,1) 41%, rgba(22,81,135,1) 100%);
-    color: white;
+    position: relative;
+    min-height: 60vh;
+}
+ 
+.videoHome {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+}
+ 
+.video-home-page::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(to top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 1) 100%); */
+    z-index: 2;
 }
 
-#home-header img{
-    object-fit: cover;
-    object-position: 50% 50%;
-    height: 100%;
-    width: 100%;
+.video-home-page p{
+    font-size: 2em;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
 }
 
 #img-header{
@@ -113,13 +163,43 @@ display: flex;
     justify-content: space-around;
 }
 
-#title-detail-category{
+
+
+.banniere-theme {
+    min-height: 60vh;
+    position: relative;
+}
+
+.img-banniere-theme {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.img-banniere-theme figure{
+    height: 400px;
+}
+
+.img-banniere-theme img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#title-detail-category {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 30vh;
+    font-size: 3em;
+    min-height: 60vh;
+    position: absolute;
+    text-align: center;
+    bottom: 25%; /* Ajustez cette valeur selon vos besoins */
+    left: 50%; /* Ajustez cette valeur selon vos besoins */
+    color: #fff; /* Couleur du texte, ajustez si nécessaire */
 }
+
 
 /********************HOME PAGE*******************/
 
@@ -147,7 +227,6 @@ display: flex;
 #title-home-page-main{
     display: flex;
     flex-direction: column;
-    margin: 20px 0 20px 0;
 }
 #main-home-page{
     min-height: 30vh;
@@ -162,17 +241,35 @@ display: flex;
     flex-flow: row wrap;
     justify-content: center;
     gap: 50px;
+    color: white;
 }
 
 #card-home-page-event{
+    transition: transform .2s;
     float: left;
     width: 25%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 25px;
     padding: 16px;
     text-align: center;
-    background-color: #f1f1f1;
+    background-image: url(/img/randonnée.jpg);
 }
+#card-home-page-event:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+
+/* .zoom {
+    margin: 0 auto;
+  } */
+  
+#carousel-avis-home{  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
 #card-home-page-event img{
     width: 100%;
 }
@@ -225,11 +322,11 @@ background-color: white;
 }
 .card-home-avis{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     min-height: 60vh;
-    width: 100%;
+    width: 70%;
     gap: 30px;
 }
 
@@ -239,19 +336,21 @@ background-color: white;
     flex-direction: column;
     gap: 20;
 }
-#card-home-page-avis{
+#slide{
+    /* position: absolute; */
+    height: 50vh;
     border-style: ridge;
     border-color: black;
     border-width: thin;
-    width: 70%;
+    width: 25%;
     border-radius: 5px;
-    padding: 30px;
+    padding: 25px;
 }
 
 /**********************PARALLAX***********************/
 
 #parallax {
-    background-image: url("/img/parallax.jpg");
+    background-image: url("/img/randonnée.jpg");
     display: flex;
     justify-content: center;
     min-height: 400px;
@@ -342,13 +441,16 @@ small{
 
 /**************************CATEGORY*************************/
 
-#detail-theme-category{
+#theme-category{
+    min-height: 100vh;
+}
+.detail-theme-category{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-#detail-theme-category a{
+.detail-theme-category a{
     text-decoration: none;
     color: black;
     font-size: 1.2em;
@@ -364,4 +466,31 @@ small{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+
+.detail-theme{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+}
+
+.detail-theme figure{
+    height: 400px;
+}
+
+
+.img-detail-theme img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#title-detail-theme {
+    position: absolute;
+    text-align: center;
+    top: 50%; /* Ajustez cette valeur selon vos besoins */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff; /* Couleur du texte, ajustez si nécessaire */
 }

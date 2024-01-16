@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Theme;
 use App\Form\ThemeType;
+use App\Repository\EventRepository;
 use App\Repository\ThemeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ThemeController extends AbstractController
 {
-    #[Route('/theme', name: 'app_theme')]
+    #[Route('/admin/theme', name: 'app_theme')]
     public function index(ThemeRepository $themeRepository): Response
     {
         // $theme = $employRepository->findAll();
@@ -70,11 +72,20 @@ class ThemeController extends AbstractController
 
 
     #[Route('/theme/{id}', name: 'afficherDetail_theme')]
-    public function afficherDetail(Theme $theme): Response
+    public function afficherDetail(Theme $theme, EventRepository $eventRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        // Récupérez les événements liés au thème spécifique
+        $eventsByTheme = $eventRepository->findEventsByTheme($theme);
+        $pagination = $paginator->paginate(
+            $eventsByTheme,
+            $request->query->getInt('page', 1),
+            3
+        );
+
         return $this->render('theme/afficherDetail.html.twig', [
             // on fais passer la variable theme a laquelle on lui donne la valeur theme
-            'theme' => $theme
+            'theme' => $theme,
+            'pagination' => $pagination 
         ]);
     }
 }

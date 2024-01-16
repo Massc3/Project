@@ -1,0 +1,14 @@
+<nav id="nav-home-page">
+    <ul class="nav-home-page">
+        {% for category in categories %}
+            <li class="category_nav">
+                <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category.nameCategory }}</a>
+                {# Si vous souhaitez également inclure des liens pour éditer et supprimer #}
+                {#<a href="{{ path('edit_category', {'id': category.id}) }}" class="edit-link">Edit</a>
+                <a href="{{ path('delete_category', {'id': category.id}) }}" class="delete-link">Supp</a>#}
+            </li>
+        {% endfor %}
+    </ul>
+    
+</nav>
+

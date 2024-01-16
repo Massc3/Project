@@ -1,26 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detail d'un theme{% endblock %}
+{% block title %}Détail d'un thème{% endblock %}
 
 {% block body %}
 
-<h1>{{theme.title}}</h1>
-
-{% if theme.events | length > 0 %}
-<div id="detail-event-theme">
-
-            {# on va recuperer la collection que l'on veut dans l'entité de l'theme (theme.php) du coup nous faison theme.(nomm de la collection) #}
-            {# grace a doctrine nous n'avons pas besoin de faire une requete qui sera ensuite géré dans le controller tout est deja fais automatiquement#}
-            {% for event in theme.events %}
-            <a href=" {{ path('afficherDetail_event', {'id' :event.id}) }}">{{ event }} </a><br>
-            {% endfor %}
-
-    
+    {% if theme.picture is defined %}
+        <section class="detail-theme">
+            <figure class="img-detail-theme">
+                <img src="{{ asset('img/' ~ theme.picture) }}" alt="{{ theme.picture }}">
+            </figure>
+            <h1 id="title-detail-theme">{{ theme.title }}</h1>
+        </section>
     {% else %}
-        <p>Il n'a aucun event dans ce theme </p>
+        <section class="detail-theme">
+            <figure class="img-detail-theme">
+                <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut">
+            </figure>
+            <h1 id="title-detail-theme">{{ theme.title }}</h1>
+        </section>
     {% endif %}
 
-    <a href="{{ path('add_event', {'themeId': theme.id})}}" type="button" class="btn btn-success">Ajouter un event</a><br>
-   
-</div>
+    <section id="card-home-page">
+        {% for event in pagination %}
+            <div id="card-home-page-event">
+                {% if event.picture is defined %}
+                    <figure>         
+                        <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" width="200" height="200">
+                    </figure>
+                {% else %}
+                    <figure>
+                        <img src="{{ asset('img/default.png') }}" alt="Image event par défaut" width="200" height="200">
+                    </figure>
+                {% endif %}
+                <figcaption>
+                    <h3>{{ event.description }}</h3>
+                    <!-- Autres informations de l'événement à afficher -->
+                    <div class="icons-events">
+                        <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
+                    </div>
+                    <p>nombre de participants : {{ event.participants|length }}</p>
+                    <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
+                </figcaption>
+            </div>
+        {% endfor %}
+        
+        {{ knp_pagination_render(pagination) }}
+
+    </section>
+
+    <a href="{{ path('add_event', {'themeId': theme.id}) }}" type="button" class="btn btn-success">Ajouter un événement</a><br>
+
 {% endblock %}

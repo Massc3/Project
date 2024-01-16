@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
     private ?string $pseudo = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Event::class, orphanRemoval: true)]
+    private Collection $event;
+
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'participants')]
+    private Collection $participant;
+
+    public function __construct()
+    {
+        $this->event = new ArrayCollection();
+        $this->participant = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +139,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvent(): Collection
+    {
+        return $this->event;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->event->contains($event)) {
+            $this->event->add($event);
+            $event->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        if ($this->event->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getUser() === $this) {
+                $event->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getParticipant(): Collection
+    {
+        return $this->participant;
+    }
+
+    public function addParticipant(Event $participant): static
+    {
+        if (!$this->participant->contains($participant)) {
+            $this->participant->add($participant);
+            $participant->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Event $participant): static
+    {
+        if ($this->participant->removeElement($participant)) {
+            $participant->removeParticipant($this);
+        }
 
         return $this;
     }

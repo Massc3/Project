@@ -4,24 +4,36 @@
 
 {% block body %}
 
-<h1 id="title-detail-category">{{category.nameCategory}}</h1>
+{# {% include "_partials/_nav.html.twig" %} #}
 
-
-{% if category.themes | length > 0 %}
-
-    <section id="detail-theme-category">
-
-    {% for theme in category.themes %}
-        <a href=" {{ path('afficherDetail_theme', {'id' :theme.id}) }}">{{ theme }} </a><br>
-        
-        {% endfor %}
-        
-        
-        {% else %}
-        <p>Il n'y a aucun theme dans cette categorie </p>
-        {% endif %}
-        
-        <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
-        
+{% if category.image is defined %}
+    <section class="img-banniere-theme">
+        <figure>
+            <img src="{{ asset('img/' ~ category.image) }}" alt="{{ category.image }}">
+            <h1 id="title-detail-category">{{ category.nameCategory }}</h1>
+        </figure>
     </section>
+{% else %}
+    <figure>
+        <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut" >
+    </figure>
+{% endif %}
+
+{% if category.themes|length > 0 %}
+
+    <section id="theme-category">
+        <div class="detail-theme-category">
+            {% for theme in category.themes %}
+                <a href="{{ path('afficherDetail_theme', {'id': theme.id}) }}">{{ theme }}</a><br>
+            {% endfor %}
+        </div>
+    </section>
+{% else %}
+    <figure>
+        <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut" width="100%" height="auto">
+    </figure>
+    <h1 id="title-detail-category">{{ category.nameCategory }}</h1>
+    <p>Il n'y a aucun thème dans cette catégorie.</p>
+{% endif %} 
+        <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
 {% endblock %}

@@ -25,15 +25,15 @@
         {% endfor %}
         
     </section>
-    <section id="home-header"
-        <figure>
-            {# <h1>Lumee</h1> #}
-            <img src="img/photo.jpg" alt="image d'acceuil">
-        </figure>
+    <section id="home-header">
+        <div class="video-home-page">
+            <video class="videoHome" src="{{asset('videos/production.mp4')}}" type="video/mp4" autoplay muted loop></video>
+            <p>Créez des souvenirs mémorables avec des amis, au cœur d'aventures palpitantes et d'événements inoubliables </p>
+        </div>
     </section>
     <section id="title-home-page-main">
         <div id="main-home-page">
-            <h2 class="title-event-home">Last Event</h2>
+            <h2 class="title-event-home">Last Events</h2>
         </div>
         <section id="card-home-page">
             {% for event in lastEvents %}
@@ -44,8 +44,7 @@
                 </figure>
                 {% else %}
                 <figure>
-                    
-                    <img src="{{asset('img/defaul.png')}}" alt="image event par default" width="200" height="200">
+                    <img src="{{asset('img/default.png')}}" alt="image event par default" width="200" height="200">
                 </figure>
                 {% endif %}
                     {# <img src="{{app_picture}}" alt=""> #}
@@ -53,12 +52,10 @@
                     <h3>{{ event.description }}</h3>
                 {# <p>{{ event.dateCreation | date('Y-m-d') }}</p> #}
                 <!-- Autres informations de l'événement à afficher -->
-                    <div class="icons-events">
-                        <a href=""><i class="fa-brands fa-gratipay fa-2x"></i></a>
-                        <a href=""><i class="fa-solid fa-thumbs-down fa-2x"></i></a>
-                        <a href=""><i class="fa-solid fa-plus fa-2x"></i></a>
-                    </div>
-                    <p>nombre de participant</p>
+                <div class="icons-events">
+                    <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
+                </div>
+                <p>nombre de participants : {{ event.participants|length }}</p>
                     <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
                 </figcaption>
             </div>
@@ -76,15 +73,18 @@
         <div class="title-commentaire-home">
             <h2>Plongez-vous dans l'aventure, créez des souvenirs et partagez des moments uniques avec de nouvelles rencontres. Rejoignez-nous pour une expérience inoubliable</h2> 
         </div>
-        <div class="card-home-avis">
+        <div id="carousel-avis-home">
+            <button class="btn" id="prev">&#10096;</button>
             {% for avis in lastAvis %}
-                <div id="card-home-page-avis">
+                <div id="slide">
                     <p>{{ avis.text }}</p>
                     <p>{{ avis.dateCommentaire | date('Y-m-d') }}</p>
                     <!-- Autres informations de l'événement à afficher -->
                     <a href="{{ path('edit_avis', {'id': avis.id}) }}" class="">Edit</a>
                 </div>
             {% endfor %}
+            <button class="btn" id="next">&#10097;</button>
+
         </div>
     </section>
 

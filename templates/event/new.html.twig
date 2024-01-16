@@ -22,7 +22,9 @@
                 {{ form_row(formAddEvent.description) }}
         </div>
         <label for="date de debut">{{ form_row(formAddEvent.dateDebut) }}</label>
-        <label for="date de debut">{{ form_row(formAddEvent.dateFin) }}</label>
+        {# {{ form_row(formAddEvent.dateDebut, {'attr': {'id': 'eventDate'}}) }} #}
+
+        <label for="date de fin">{{ form_row(formAddEvent.dateFin) }}</label>
 
         {{ form_row(formAddEvent.note) }}
 

@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
+    #[Route('/admin/category', name: 'app_category')]
     public function index(CategoryRepository $categoryRepository): Response
     {
         // $category = $employRepository->findAll();
@@ -89,4 +89,6 @@ class CategoryController extends AbstractController
             'category' => $category
         ]);
     }
+
+    
 }

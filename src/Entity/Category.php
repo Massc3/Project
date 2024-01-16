@@ -21,6 +21,9 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Theme::class, orphanRemoval: true)]
     private Collection $themes;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $image = null;
+
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
 
@@ -79,5 +82,17 @@ class Category
     public function __toString()
     {
         return $this->nameCategory;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }
