@@ -26,18 +26,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    // #[Route('/category/new', name: 'add_category')]
-
-    // public function add(Request $request): Response
-    // {
-    //     $category = new category();
-
-    //     $form = $this->createForm(categoryType::class, $category);
-
-    //     return $this->render('category/new.html.twig', [
-    //         'formAddcategory' => $form,
-    //     ]);
-    // }
+   
     #[Route('/category/new', name: 'add_category')]
     #[Route('/category/{id}/edit', name: 'edit_category')]
     public function new_edit(Category $category = null, Request $request, EntityManagerInterface $entityManager): Response

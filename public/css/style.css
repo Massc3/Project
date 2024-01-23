@@ -55,6 +55,24 @@ title{
 }
 /*************Base.Html*******************/
 
+.logo{
+    flex: 1;
+}
+.pseudo-log{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 50px;
+}
+
+.pseudo-log p{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
 #title_base{
     display: flex;
     flex-direction: row;
@@ -63,16 +81,20 @@ title{
 #title_base h1{
     flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    font-weight: bold;
 }
 #title_base img{
     width: 85px;
 }
 #title_base a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     color: black;
-    margin: 5px 0 5px 0;
+    font-weight: bold;
 }
 #title_base ul{
     display: flex;
@@ -187,17 +209,12 @@ display: flex;
 }
 
 #title-detail-category {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     font-size: 3em;
-    min-height: 60vh;
     position: absolute;
     text-align: center;
-    bottom: 25%; /* Ajustez cette valeur selon vos besoins */
-    left: 50%; /* Ajustez cette valeur selon vos besoins */
-    color: #fff; /* Couleur du texte, ajustez si nécessaire */
+    bottom: 50%;
+    left: 50%;
+    color: #fff;
 }
 
 
@@ -234,35 +251,7 @@ display: flex;
     justify-content: center;
     align-items: center;
 }
-#card-home-page{
-    min-height: 100vh;
-    margin: 30px 0 30px 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    gap: 50px;
-    color: white;
-}
 
-#card-home-page-event{
-    transition: transform .2s;
-    float: left;
-    width: 25%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 25px;
-    padding: 16px;
-    text-align: center;
-    background-image: url(/img/randonnée.jpg);
-}
-#card-home-page-event:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
-  transform: scale(1.1); 
-}
-
-/* .zoom {
-    margin: 0 auto;
-  } */
   
 #carousel-avis-home{  display: flex;
   flex-direction: row;
@@ -270,18 +259,12 @@ display: flex;
   align-items: center;
 }
 
-#card-home-page-event img{
-    width: 100%;
-}
 
-#card-home-page-event figcaption{
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    text-align: center;
-  padding: 10px 20px;
+.message-complet-event{
+    background-color: red;
+    border-radius: 5px;
+    font-size: 1.5em;
 }
-
 .icons-events{
     display: flex;
     flex-direction: row;
@@ -292,7 +275,7 @@ display: flex;
     color: black;
 }
 .icons-events i:hover{
-    color: white;
+    color: blue;
     
 }
 .fa-brands fa-gratipay:hover{
@@ -460,37 +443,187 @@ small{
     border-radius: 5px;
     padding: 10px;
 }
+/**********************THEME**********************/
 
-/**********************THEME*********************/
-#detail-event-theme{
+.detail-theme img{
+    position: relative;
+    height: 400px; /* Hauteur fixe pour l'image */
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.img-detail-theme {
+    position: relative;
+}
+
+
+#title-detail-theme {
+    position: absolute;
+    text-align: center;
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 24px; /* Ajustez la taille du texte selon vos préférences */
+    z-index: 1; /* Assurez-vous que le titre est au-dessus de l'image */
+}
+
+
+/**********************CARD EVENT DANS THEME*********************/
+
+#detail-event-theme {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-
-.detail-theme{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-}
-
-.detail-theme figure{
-    height: 400px;
-}
-
-
-.img-detail-theme img {
+.detail-theme {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container:hover .figcaption {
+    transform: rotateX(-10deg) rotateY(-10deg);
+}
+
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: red;
+    z-index: 1;
+}
+
+figcaption {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transform: rotateX(0) rotateY(0);
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+figcaption:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+figcaption h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.icons-events {
+    margin-bottom: 15px;
+}
+
+.icons-events a {
+    margin-right: 10px;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.icons-events a:hover {
+    color: green;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.edit-link {
+    color: #27ae60;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.edit-link:hover {
+    color: #1d8348;
+}
+
+.icons-and-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icons-events {
+    display: flex;
+    gap: 10px;
+}
+
+p {
+    margin-left: auto;
+}
+
+/* Styles pour les cartes */
+#card-home-page {
+    margin: 30px 0 30px 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 50px;
+}
+
+#card-home-page-event {
+    transition: transform .2s;
+    float: left;
+    width: 25%;
+    text-align: center;
+    overflow: hidden;
+}
+
+#card-home-page-event:hover {
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#card-home-page-event img {
+    width: 100%;
+    /* height: 100%; */
     object-fit: cover;
 }
 
-#title-detail-theme {
-    position: absolute;
+#card-home-page-event figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
     text-align: center;
-    top: 50%; /* Ajustez cette valeur selon vos besoins */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff; /* Couleur du texte, ajustez si nécessaire */
 }
+
+
+/**********PARTICIPANT EVENT AVATAR***************/
+
+/* Ajoutez cette classe pour styliser les cercles */
+.circle-avatar {
+    display: inline-block;
+    width: 30px; /* Ajustez la taille du cercle selon vos besoins */
+    height: 30px; /* Ajustez la taille du cercle selon vos besoins */
+    background-color: #3498db; /* Couleur de fond du cercle */
+    color: #fff; /* Couleur du texte dans le cercle */
+    text-align: center;
+    border-radius: 50%; /* Rend le div en forme de cercle */
+    line-height: 30px; /* Centre le texte verticalement */
+    margin-right: 5px; /* Marge à droite pour espacement entre les cercles */
+}
+
+/**************PAGINATION*************/
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+

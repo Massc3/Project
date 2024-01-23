@@ -7,3 +7,12 @@ controllers:
 app_participate_event:
     path: '/event/{id}/participate'
     controller: 'App\Controller\EventController::participate'
+
+share_event:
+    path: '/event/{id}/share'
+    controller: 'App\Controller\EventController::shareEvent'
+    methods: ['GET']
+
+mes_favoris:
+    path: /mes-favoris
+    controller: App\Controller\FavorisController::mesFavoris

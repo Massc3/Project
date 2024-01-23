@@ -4,28 +4,30 @@
 
 {% block body %}
 
-    {% if theme.picture is defined %}
-        <section class="detail-theme">
-            <figure class="img-detail-theme">
-                <img src="{{ asset('img/' ~ theme.picture) }}" alt="{{ theme.picture }}">
-            </figure>
-            <h1 id="title-detail-theme">{{ theme.title }}</h1>
-        </section>
-    {% else %}
-        <section class="detail-theme">
-            <figure class="img-detail-theme">
-                <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut">
-            </figure>
-            <h1 id="title-detail-theme">{{ theme.title }}</h1>
-        </section>
-    {% endif %}
+    <section class="detail-theme">
+        {% if theme.picture is defined %}
+                <figure class="img-detail-theme">
+                    <img src="{{ asset('img/' ~ theme.picture) }}" alt="{{ theme.picture }}">
+                </figure>
+                <h1 id="title-detail-theme">{{ theme.title }}</h1>
+    </section>
+        {% else %}
+    <section class="detail-theme">
+                <figure class="img-detail-theme">
+                    <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut">
+                </figure>
+                <h1 id="title-detail-theme">{{ theme.title }}</h1>
+        {% endif %}
+    </section>
 
     <section id="card-home-page">
         {% for event in pagination %}
             <div id="card-home-page-event">
                 {% if event.picture is defined %}
-                    <figure>         
-                        <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" width="200" height="200">
+                <h3>{{ event.description }}</h3>
+                    <figure class="image-container">         
+                        <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" class="img-event">
+                        <i class="fas fa-heart heart-icon"></i>
                     </figure>
                 {% else %}
                     <figure>
@@ -33,18 +35,31 @@
                     </figure>
                 {% endif %}
                 <figcaption>
-                    <h3>{{ event.description }}</h3>
-                    <!-- Autres informations de l'événement à afficher -->
-                    <div class="icons-events">
-                        <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
+                    <div class="icons-and-text">
+                        <div class="icons-events">
+                            <a href="{{ path('participate_event', {'id': event.id}) }}">Participer</a>
+                            <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                        </div>
+                        <p> {{ event.participants|length }} / {{ event.note }}
+                            {% if event.participants|length > 0 %}
+                                <br>
+                                {% for participant in event.participants %}
+                                    <span class="circle-avatar">{{ participant.pseudo }}</span>{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </p>                        
                     </div>
-                    <p>nombre de participants : {{ event.participants|length }}</p>
-                    <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
+                    {# <a href="{{ path('edit_event', {'id': event.id}) }}" class="edit-link">Edit</a> #}
                 </figcaption>
+                
             </div>
         {% endfor %}
+    </section>
+    
         
+    <div id="pagination-container">
         {{ knp_pagination_render(pagination) }}
+    </div>
 
     </section>
 

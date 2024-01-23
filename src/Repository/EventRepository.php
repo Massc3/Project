@@ -35,6 +35,7 @@ class EventRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
     public function findEventsByTheme(Theme $theme)
     {
         $entityManager = $this->getEntityManager();
@@ -48,13 +49,26 @@ class EventRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
-    
-    public function PaginationQuery() 
+
+    public function PaginationQuery()
     {
         return $this->createQueryBuilder('e')
             ->orderBy('e.id', 'ASC')
             ->getQuery();
     }
+
+
+    public function findEventWithParticipants($eventId)
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e', 'p') // Sélectionner l'événement et ses participants
+            ->leftJoin('e.participants', 'p') // Joindre la relation des participants
+            ->where('e.id = :eventId')
+            ->setParameter('eventId', $eventId)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
     //    public function findOneBySomeField($value): ?Event
     //    {
