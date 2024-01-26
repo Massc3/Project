@@ -1,39 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un event{% endblock %}
+{% block title %}
+    {% if edit %}
+        Éditer un événement
+    {% else %}
+        Ajouter un événement
+    {% endif %}
+{% endblock %}
 
 {% block body %}
+    <div class="container">
+        <h1 class="text-center mt-4">
+            {% if edit %}
+                Éditer un événement
+            {% else %}
+                Ajouter un événement
+            {% endif %}
+        </h1>
 
-{% if edit %}
-<h1>Editer un event</h1>
-    
-{% else %}
-<h1>Ajouter un event</h1>
+        {{ form_start(formAddEvent, {'attr': {'class': 'mt-4'}}) }}
 
-{% endif %}
+        <div class="row">
+            <div class="col-md-4">
+                <figure>
+                    {{ form_row(formAddEvent.picture, {'attr': {'class': 'form-control'}}) }}
+                </figure>
+            </div>
 
-{{ form_start(formAddEvent) }}
-<div class="row">
-        <figure>
-                {{ form_row(formAddEvent.picture) }}
-        </figure>
-        <div>
-                {{ form_row(formAddEvent.theme) }}
-                {{ form_row(formAddEvent.description) }}
+            <div class="col-md-8">
+
+                <div class="form-group">
+                    {{ form_row(formAddEvent.description, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(formAddEvent.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(formAddEvent.dateFin, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(formAddEvent.note, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
         </div>
-        <label for="date de debut">{{ form_row(formAddEvent.dateDebut) }}</label>
-        {# {{ form_row(formAddEvent.dateDebut, {'attr': {'id': 'eventDate'}}) }} #}
 
-        <label for="date de fin">{{ form_row(formAddEvent.dateFin) }}</label>
+        <div class="text-center mt-4">
+            {# <button type="submit" class="btn btn-primary">
+                {% if edit %}
+                    Enregistrer les modifications
+                {% else %}
+                    Ajouter l'événement
+                {% endif %}
+            </button> #}
+        </div>
 
-        {{ form_row(formAddEvent.note) }}
-
-</div>
-{# <button type="submit">{{button_label|default('default value')('publier')}}</button> #}
-
-
-
-{{ form_end(formAddEvent) }}
-{# {{ form(formAddevent) }} #}
-
+        {{ form_end(formAddEvent) }}
+    </div>
 {% endblock %}

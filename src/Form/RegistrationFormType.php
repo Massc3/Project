@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
             // repeatedType a retrouver dans la RepeatedType symfony sur le nagivateur
             ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
@@ -46,6 +47,7 @@ class RegistrationFormType extends AbstractType
                     'message' => 'Erreur, manque de caractères speciaux'
                 ])
             ])
+            
             ->add('honeypot', HiddenType::class, [
                 'mapped' => false,
                 'required' => false, // Rendre le champ facultatif

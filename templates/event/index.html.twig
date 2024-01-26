@@ -3,9 +3,9 @@
 {% block title %}Events!{% endblock %}
 
 {% block body %}
-<h1>List des event</h1>
+    <h1>List des event</h1>
 
-{% for event in events %}
+    {% for event in events %}
         <tr>
             <td>
                 {% if event.picture is defined %}
@@ -34,7 +34,7 @@
         </tr>          
         
         {# <a href="{{path('add_event', {'id' : event.theme.id}) }}">ajouter un event</a> #}
-        {% endfor %}
+    {% endfor %}
 
 
 {% endblock %}

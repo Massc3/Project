@@ -1,22 +1,19 @@
 /****************GENERAL******************/
 
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: serif;
 }
-/* section{
-    min-height: 100vh;
-} */
-/* body{
-    min-height: 100vh;
-} */
+
+
 #main-content {
     display: flex;
     flex-direction: column;
 }
-title{
+
+title {
     text-align: center;
 }
 /***************************PARTIALS**************************/
@@ -124,19 +121,18 @@ title{
     z-index: 1;
     object-fit: cover;
 }
- 
-.video-home-page::before{
+
+.video-home-page::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: linear-gradient(to top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 1) 100%); */
     z-index: 2;
 }
 
-.video-home-page p{
+.video-home-page p {
     font-size: 2em;
     z-index: 2;
     position: absolute;
@@ -159,11 +155,13 @@ title{
 }
 
 /**************CATEGORY*************/
-.index_category_nav{
-display: flex;
-}
+
 .category_nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     list-style: none;
+    gap: 30px;
 }
 .category_nav a{
     text-decoration: none;
@@ -176,16 +174,12 @@ display: flex;
     background: #282828;
     color: white;
 }
-.category_nav{
-       padding: 10px;
-}
+
 .index_category{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-
-
 
 .banniere-theme {
     min-height: 60vh;
@@ -221,17 +215,7 @@ display: flex;
 /********************HOME PAGE*******************/
 
 #category-nav-home-page{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     min-height: 10vh;
-    align-items: center;
-}
-
-.nav-home-page{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
 }
 
 .title-event-home{
@@ -283,6 +267,7 @@ color: green;
 background-color: white;
 
 }
+
 
 /****************COMMENTAIRES************/
 
@@ -341,7 +326,6 @@ background-color: white;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* opacity: 0.5; */
 }
 #parallax img {
     object-fit: cover;
@@ -416,33 +400,71 @@ small{
 
 .information-footer{
     border-style: ridge;
-    border-color: black;
+    border-color: white;
     border-width: thin;
     border-radius: 5px;
     padding: 10px;
 }
+.information-footer p {
+    color: white;
+}
 
 /**************************CATEGORY*************************/
-
-#theme-category{
+#theme-category {
     min-height: 100vh;
 }
-.detail-theme-category{
+
+.detail-theme-category {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.detail-theme-category a{
-    text-decoration: none;
-    color: black;
-    font-size: 1.2em;
-    border-style: ridge;
-    border-color: black;
-    border-width: thin;
-    border-radius: 5px;
-    padding: 10px;
+.theme-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
 }
+
+.figure-theme-category {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin: 40px 0 0px 0;
+}
+
+.figure-theme-category img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    height: 70%;
+    width: 60%;
+    border-radius: 50%;
+}
+
+
+
+.theme-item a {
+    text-decoration: none;
+    font-size: 2em;
+    display: block;
+    color: white;
+    padding: 100px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 45%; /* Position au milieu de la figure */
+    left: 0;
+    right: 0;
+    transform: translateY(50%); /* Ajustement pour le centrage vertical */
+    text-align: center;
+}
+
+
+
 /**********************THEME**********************/
 
 .detail-theme img{
@@ -612,8 +634,8 @@ p {
     display: inline-block;
     width: 30px; /* Ajustez la taille du cercle selon vos besoins */
     height: 30px; /* Ajustez la taille du cercle selon vos besoins */
-    background-color: #3498db; /* Couleur de fond du cercle */
-    color: #fff; /* Couleur du texte dans le cercle */
+    /* background-color: #3498db; Couleur de fond du cercle */
+    color: black; /* Couleur du texte dans le cercle */
     text-align: center;
     border-radius: 50%; /* Rend le div en forme de cercle */
     line-height: 30px; /* Centre le texte verticalement */
@@ -625,5 +647,202 @@ p {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+
+
+/********************RESPONSIVE TABLETTE*************/
+/* Ajoutez ces règles de médias pour les tablettes */
+@media only screen and (max-width: 768px) {
+    /* Général */
+    body {
+        font-size: 14px;
+    }
+
+    /* Navigations et en-têtes */
+    #nav-constant {
+        padding: 0 15px;
+    }
+
+    .pseudo-log {
+        gap: 20px;
+    }
+
+    #title_base {
+        padding: 0 15px;
+    }
+
+    #home-header {
+        min-height: 40vh;
+    }
+
+    .videoHome p {
+        font-size: 1.5em;
+    }
+
+    .category_nav a {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    .title-event-home {
+        font-size: 1.5em;
+    }
+
+    /* Cartes et éléments de la page d'accueil */
+    #card-home-page-event {
+        width: 50%;
+    }
+
+    .icons-events i {
+        font-size: 1.2em;
+    }
+
+    .edit-link {
+        font-size: 0.9em;
+    }
+
+    /* Catégorie et thème */
+    .detail-theme-category a {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    .detail-theme img {
+        height: 300px;
+    }
+
+    #detail-event-theme {
+        flex-direction: column;
+    }
+
+    /* Pied de page */
+    .footer {
+        flex-direction: column;
+    }
+}
+
+/************************RESPONSIVE MOBIl******************/
+
+/* Ajoutez ces règles de médias pour les écrans mobiles */
+@media only screen and (max-width: 480px) {
+
+    /********************* GÉNÉRAL *********************/
+
+    body {
+        font-size: 12px;
+    }
+
+    /********************* NAVIGATIONS ET EN-TÊTES *********************/
+
+    #nav-constant {
+        padding: 0 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pseudo-log {
+        gap: 10px;
+    }
+
+    #title_base {
+        padding: 0 10px;
+    }
+
+    #nav-constant h1 {
+        margin-bottom: 10px;
+    }
+
+    #nav-constant ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    /********************* PAGE D'ACCUEIL *********************/
+
+    #home-header {
+        min-height: 30vh;
+    }x
+
+    .videoHome p {
+        font-size: 1.2em;
+    }
+
+     /* Dropdown container */
+     .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+
+    /* Contenu du dropdown (masqué par défaut) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /* Liens à l'intérieur du dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Changement de couleur au survol */
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Afficher le dropdown au survol */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .title-event-home {
+        font-size: 1.2em;
+    }
+
+    #card-home-page-event {
+        width: 100%;
+    }
+
+    .icons-events i {
+        font-size: 1em;
+    }
+
+    .edit-link {
+        font-size: 0.8em;
+    }
+
+    /********************* CATÉGORIE ET THÈME *********************/
+
+    .detail-theme-category a {
+        font-size: 0.8em;
+        padding: 6px;
+    }
+
+    .detail-theme img {
+        height: 200px;
+    }
+
+    #detail-event-theme {
+        flex-direction: column;
+    }
+
+    /********************* PIED DE PAGE *********************/
+
+    .footer {
+        flex-direction: column;
+    }
+    .information-footer p{
+        color: white;
+        text-align: center;
+    }
 }
 

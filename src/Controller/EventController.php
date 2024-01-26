@@ -147,16 +147,16 @@ class EventController extends AbstractController
         return $this->redirect($referer);
     }
 
-    #[Route('/event/{id}/share', name: 'share_event')]
-    public function shareEvent(Event $event): Response
-    {
-        // Générer le lien partageable, par exemple, avec la route "afficherDetail_event"
-        $sharedLink = $this->generateUrl('afficherDetail_event', ['id' => $event->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+    // #[Route('/event/{id}/share', name: 'share_event')]
+    // public function shareEvent(Event $event): Response
+    // {
+    //     // Générer le lien partageable, par exemple, avec la route "afficherDetail_event"
+    //     $sharedLink = $this->generateUrl('afficherDetail_event', ['id' => $event->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
         
-        return $this->render('event/share_event.html.twig', [
-            'event' => $event,
-            'sharedLink' => $sharedLink,
-        ]);
-    }
+    //     return $this->render('event/share_event.html.twig', [
+    //         'event' => $event,
+    //         'sharedLink' => $sharedLink,
+    //     ]);
+    // }
 }

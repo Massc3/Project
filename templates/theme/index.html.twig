@@ -2,38 +2,39 @@
 
 {% block title %}Liste des themes!{% endblock %}
 
+
 {% block body %}
-<h1>Liste des themes</h1>
-<table class="">
-    <thead class="">
-        <tr>
-            <th>Nom</th>
-            <th>Editer</th>
-            <th>Supprimer</th>
-        </tr>
-    </thead>
+    <h1>Liste des themes</h1>
+    <table class="">
+        <thead class="">
+            <tr>
+                <th>Nom</th>
+                <th>Editer</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        {% for theme in themes %}
-        <tr>
-            <td>
-                {# {{...}} correspond a l'echo en symfony #}
-                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans theme.php #}
-                <a href="{{ path('afficherDetail_theme', {'id': theme.id}) }}">{{ theme }}</a>  
-            </td>
-            <td>
-                <a href=" {{ path('edit_theme', {'id' : theme.id}) }}" class="btn btn-warning">Edit</a>
-            </td>
-            <td>
-                <a href=" {{ path('delete_theme', {'id' :theme.id}) }}" class="btn btn-danger">Supp</a>
-            </td>
-        </tr>          
+        <tbody>
+            {% for theme in themes %}
+            <tr>
+                <td>
+                    {# {{...}} correspond a l'echo en symfony #}
+                    {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans theme.php #}
+                    <a href="{{ path('afficherDetail_theme', {'id': theme.id}) }}">{{ theme }}</a> 
+                </td>
+                <td>
+                    <a href=" {{ path('edit_theme', {'id' : theme.id}) }}" class="btn btn-warning">Edit</a>
+                </td>
+                <td>
+                    <a href=" {{ path('delete_theme', {'id' :theme.id}) }}" class="btn btn-danger">Supp</a>
+                </td>
+            </tr>          
+                
+                {% endfor %}
             
-            {% endfor %}
-        
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<a href="{{path('add_theme')}}" class="">Ajouter un theme</a>
+    <a href="{{path('add_theme')}}" class="">Ajouter un theme</a>
 
 {% endblock %}

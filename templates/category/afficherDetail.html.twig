@@ -24,10 +24,16 @@
     <section id="theme-category">
         <div class="detail-theme-category">
             {% for theme in category.themes %}
-                <a href="{{ path('afficherDetail_theme', {'id': theme.id}) }}">{{ theme }}</a><br>
+                <div class="theme-item">
+                    <figure class="figure-theme-category">
+                        <img src="/img/background-2867488_1280.jpg" alt="">
+                    </figure>
+                    <a href="{{ path('afficherDetail_theme', {'id': theme.id}) }}">{{ theme }}</a>
+                </div>
             {% endfor %}
         </div>
     </section>
+
 {% else %}
     <figure>
         <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut" width="100%" height="auto">
