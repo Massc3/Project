@@ -28,8 +28,8 @@ class ThemeController extends AbstractController
         ]);
     }
 
-    #[Route('/theme/new', name: 'add_theme')]
-    #[Route('/theme/{id}/edit', name: 'edit_theme')]
+    #[Route('/admin/theme/new', name: 'add_theme')]
+    #[Route('/admin/theme/{id}/edit', name: 'edit_theme')]
     public function new_edit(Theme $theme = null, Request $request, EntityManagerInterface $entityManager): Response
     {
 

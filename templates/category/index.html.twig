@@ -14,12 +14,14 @@
                     {# .raisonSociale va appeler le Getter de raison social que l'on reulouve dans category.php #}
                     <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a> 
                 </li>
-                <td>
-                    <a href=" {{ path('edit_category', {'id' : category.id}) }}" class="btn btn-warning">Edit</a>
-                </td>
-                <td>
-                    <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="btn btn-danger">Supp</a>
-                </td>
+                {% if is_granted('ROLE_ADMIN') %}    
+                    <td>
+                        <a href=" {{ path('edit_category', {'id' : category.id}) }}" class="btn btn-warning">Edit</a>
+                    </td>
+                    <td>
+                        <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="btn btn-danger">Supp</a>
+                    </td>
+                {% endif %}
             </ul>          
                 
                 {% endfor %}

@@ -3,38 +3,42 @@
 {% block title %}Events!{% endblock %}
 
 {% block body %}
-    <h1>List des event</h1>
+    <div class="container">
+        <!-- Titre de la page -->
+        <h1>Liste des événements</h1>
 
-    {% for event in events %}
-        <tr>
-            <td>
-                {% if event.picture is defined %}
-                <figure>
-                    <img src="{{asset('img/' ~ event.picture)}}" alt="{{event.description}}" width="500" height="500">
-                </figure>
-                {% else %}
-                <figure>
-                    
-                    <img src="{{asset('img/parc.jpg')}}" alt="image event par default" width="200" height="200">
-                </figure>
-                {% endif %}
-            </td>
-            <td>
-                {# {{...}} correspond a l'echo en symfony #}
-                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans event.php #}
-                <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">{{ event.description }}</a>  
-            </td>
-            <td>
-                <a href=" {{ path('edit_event', {'id': event.id}) }}" class="btn btn-warning">Edit</a>
-                
-            </td>
-            {# <td>
-                <a href=" {{ path('delete_event', {'id' :event.id}) }}" class="btn btn-danger">Supp</a>
-            </td> #}
-        </tr>          
-        
-        {# <a href="{{path('add_event', {'id' : event.theme.id}) }}">ajouter un event</a> #}
-    {% endfor %}
-
-
+        <!-- Tableau pour afficher les événements -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <!-- Colonne de l'image de l'événement -->
+                        <td>
+                            {% if event.picture is defined %}
+                                <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" class="img-thumbnail">
+                            {% else %}
+                                <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut" class="img-thumbnail">
+                            {% endif %}
+                        </td>
+                        <!-- Colonne de la description de l'événement avec lien vers les détails -->
+                        <td>
+                            <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">{{ event.description }}</a>
+                        </td>
+                        <!-- Colonne des actions (Modifier et Supprimer) pour chaque événement -->
+                        <td>
+                            <a href="{{ path('edit_event', {'id': event.id}) }}" class="btn btn-warning">Modifier</a>
+                            <a href="{{ path('delete_event', {'id': event.id}) }}" class="btn btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

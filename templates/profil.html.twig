@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@2.4.0/dist/axentix.min.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+</head>
+<body class="layout with-sidenav">
+
+    <!-- Header Section -->
+    <header id="title_base">
+        
+        <div class="logo">
+            <a href="{{ path('app_home') }}">
+                <figure>
+                    <img src="{{ asset('img/lo.png') }}" alt="Logo">
+                </figure>
+            </a>
+        </div>
+        <div class="user-section">
+            {% if app.user %}
+                <div class="pseudo-log">
+                    <!-- User is logged in -->
+                    <a href="{{ path('app_users') }}">{{ app.user.pseudo }}</a>
+                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% else %}
+                <!-- User is not logged in -->
+                <ul>
+                    <li><a href="{{ path('app_register') }}">Register</a></li>
+                    <li><a href="{{ path('app_login') }}">Login</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <div class="layout-sidenav">
+            <!-- Sidenav Section -->
+            <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 sidenav-fixed white">
+                
+                <a href="#" class="sidenav-link active">Mon profil</a>
+                <a href="#" class="sidenav-link">Mes events</a>
+                <a href="#" class="sidenav-link">Mes favoris</a>
+                <a href="#" class="sidenav-link">Link 4</a>
+            </div>
+        </div>
+
+        <!-- Main Content of the Page -->
+        <div class="content">
+            <!-- Code your main content here -->
+            <button data-target="example-sidenav" class="btn rounded-1 press amaranth dark-1 hide-md-up">
+                Open sidenav
+            </button>
+
+            <!-- Add this button wherever you want in your HTML, inside the content section for example -->
+            <button onclick="goBack()" class="btn rounded-1 press amaranth dark-1">
+                Go Back
+            </button>
+
+            {% block body %}
+                <!-- Additional content for the body block -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <!-- Code for the footer goes here -->
+    </footer>
+
+    <!-- JavaScript Section -->
+    {% block javascripts %}
+        <!-- Additional scripts go here -->
+    {% endblock javascripts %}
+    
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axentix@2.4.0/dist/axentix.min.js"></script>
+    <script src="{{ asset('js/scrpti.js') }}"></script>
+</body>
+</html>

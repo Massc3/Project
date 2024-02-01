@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -43,10 +45,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'participants')]
     private Collection $participant;
 
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[JoinTable('user_post_like')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->event = new ArrayCollection();
         $this->participant = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,4 +206,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(User $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+        return $this;
+    }
+
+    public function removeLike(User $like): self
+    {
+        $this->likes->removeElement($like);
+
+        return $this;
+    }
+
+        public function isEqualTo(User $otherUser): bool
+    {
+        return $this->getId() === $otherUser->getId();
+    }
+
+    //     // Comparez les ID des utilisateurs
+    //     return $this->id === $user->getId();
+    // }
+
+
+
 }

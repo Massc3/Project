@@ -1,0 +1,25 @@
+{% extends 'profil.html.twig' %}
+
+{% block title %}page profil{% endblock %}
+
+{% block body %}
+
+<div >
+    <div>{{app.user.pseudo}}</div>
+    <div>age</div>
+</div>
+
+<div>
+    {# mes events ({{app.user.events|length }}) #}
+</div>
+{# {% for event in app.user.events %}
+    {{ event.description }}<br>
+    {# Ajoutez d'autres propriétés d'événement que vous souhaitez afficher #}
+{# {% endfor %}  #}
+
+<div>
+    mes favoris
+</div>
+
+
+{% endblock %}

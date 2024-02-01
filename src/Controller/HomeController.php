@@ -28,6 +28,19 @@ class HomeController extends AbstractController
             'categories' => $categories,
             'lastEvents' => $lastEvents,
             'lastAvis' => $lastAvis,
+            // 'isHomePage' => true, // Vous êtes sur la page d'accueil
+        ]);
+    }
+
+    #[Route('/home', name: 'app_base')]
+    public function home(CategoryRepository $categoryRepository): Response
+    {
+        $categories = $categoryRepository->findBy([], ['nameCategory' => 'ASC']);
+
+        // Passer la variable $isHomePage à la vue
+        return $this->render('home/.html.twig', [
+            'categories' => $categories,
+            'isHomePage' => false, // Vous n'êtes pas sur la page d'accueil
         ]);
     }
 
@@ -46,6 +59,8 @@ class HomeController extends AbstractController
            
         ]);
     }
+
+    
     // #[Route('/home/event', name: 'app_event')]
     // public function lastEvents(EventRepository $eventRepository): Response
     // {

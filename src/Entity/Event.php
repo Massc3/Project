@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use DateTime;
+use App\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -201,6 +203,16 @@ class Event
 
         return $this;
     }
+    /**
+     * Check if a user is a participant in the event.
+     *
+     * @param UserInterface $user
+     * @return bool
+     */
+    public function isParticipant(UserInterface $user): bool
+    {
+        return $this->participants->contains($user);
+    }
 
     /**
      * @return Collection<int, User>
@@ -219,13 +231,22 @@ class Event
         return $this;
     }
 
+        /**
+     * Remove a participant from the event.
+     *
+     * @param User $participant
+     * @return $this
+     */
     public function removeParticipant(User $participant): static
     {
-        $this->participants->removeElement($participant);
+        // Utilisez le isEqualTo fourni par Symfony pour comparer les objets User
+        if ($this->participants->contains($participant) && $participant->isEqualTo($this->user)) {
+            $this->participants->removeElement($participant);
+        }
 
         return $this;
     }
-
+    
 
   
 }

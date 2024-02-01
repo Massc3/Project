@@ -4,9 +4,11 @@
 
 {% block body %}
 
+{# Comment: Inclusion du fichier de navigation (commenté pour le moment) #}
 {# {% include "_partials/_nav.html.twig" %} #}
 
 {% if category.image is defined %}
+    {# Comment: Section de la bannière avec l'image de la catégorie #}
     <section class="img-banniere-theme">
         <figure>
             <img src="{{ asset('img/' ~ category.image) }}" alt="{{ category.image }}">
@@ -14,13 +16,14 @@
         </figure>
     </section>
 {% else %}
+    {# Comment: Utilisation d'une image par défaut si aucune image définie pour la catégorie #}
     <figure>
-        <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut" >
+        <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut">
     </figure>
 {% endif %}
 
 {% if category.themes|length > 0 %}
-
+    {# Comment: Section des thèmes s'il y a des thèmes dans la catégorie #}
     <section id="theme-category">
         <div class="detail-theme-category">
             {% for theme in category.themes %}
@@ -33,13 +36,18 @@
             {% endfor %}
         </div>
     </section>
-
 {% else %}
+    {# Comment: Section si aucune catégorie n'est définie dans la catégorie #}
     <figure>
         <img src="{{ asset('img/parc.jpg') }}" alt="Image par défaut" width="100%" height="auto">
     </figure>
     <h1 id="title-detail-category">{{ category.nameCategory }}</h1>
     <p>Il n'y a aucun thème dans cette catégorie.</p>
 {% endif %} 
-        <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un theme</a><br>
+
+{% if is_granted('ROLE_ADMIN') %}
+    {# Comment: Lien pour ajouter un thème visible uniquement pour les administrateurs #}
+    <a href="{{ path('add_theme', {'category_id': category.id}) }}" type="button" class="btn btn-success">Ajouter un thème</a><br>
+{% endif %}
+
 {% endblock %}

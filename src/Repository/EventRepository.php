@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Event;
 use App\Entity\Theme;
 use Doctrine\Persistence\ManagerRegistry;
@@ -69,7 +70,25 @@ class EventRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+/**
+     * Trouver des événements qui se chevauchent pour un utilisateur dans une plage horaire spécifiée.
+     *
+     * @param User $user
+     * @param \DateTimeInterface $start
+     * @param \DateTimeInterface $end
+     * @return array
+     */
+    public function findOverlappingEvents(User $user, \DateTimeInterface $start, \DateTimeInterface $end): array
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->andWhere('e.dateDebut < :end')
+            ->andWhere('e.dateFin > :start')
+            ->setParameter('start', $end)
+            ->setParameter('end', $start)
+            ->getQuery();
 
+        return $qb->getResult();
+    }
     //    public function findOneBySomeField($value): ?Event
     //    {
     //        return $this->createQueryBuilder('e')

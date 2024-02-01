@@ -13,6 +13,17 @@ share_event:
     controller: 'App\Controller\EventController::shareEvent'
     methods: ['GET']
 
-mes_favoris:
-    path: /mes-favoris
-    controller: App\Controller\FavorisController::mesFavoris
+
+app_users:
+    path: /user
+    controller: App\Controller\UserController::index
+
+
+withdraw_event:
+    path: '/event/{id}/withdraw'
+    controller: 'App\Controller\EventController::withdraw'
+    methods: ['GET']
+
+# mes_favoris:
+#     path: /mes-favoris
+#     controller: App\Controller\FavorisController::mesFavoris

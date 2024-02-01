@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events!{% endblock %}
+
+{% block body %}
+    <h1>event</h1>
+
+    {% for event in events %}
+        <tr>
+            <td>
+                {% if event.picture is defined %}
+                <figure>
+                    <img src="{{asset('img/' ~ event.picture)}}" alt="{{event.description}}">
+                </figure>
+                {% else %}
+                <figure>
+                    <img src="{{asset('img/parc.jpg')}}" alt="image event par default">
+                </figure>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ path('event_detail', {'id': event.id}) }}">{{ event.description }}</a>
+            </td>
+            <td>
+                {# {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('add_event', {'id' : event.theme.id}) }}">ajouter un event</a>
+                {% endif %} #}
+            </td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

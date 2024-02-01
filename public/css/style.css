@@ -8,15 +8,14 @@
 }
 
 
-#main-content {
-    display: flex;
-    flex-direction: column;
-}
 
 title {
     text-align: center;
 }
-/***************************PARTIALS**************************/
+
+
+
+/***************************NAV CATEGORY**************************/
 
 #nav-constant{
     display: flex;
@@ -52,134 +51,120 @@ title {
 }
 /*************Base.Html*******************/
 
-.logo{
-    flex: 1;
-}
-.pseudo-log{
-    flex: 1;
+#title_base {
+    background-color: white;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 0 30px;
     align-items: center;
-    gap: 50px;
 }
 
-.pseudo-log p{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
 
-#title_base{
+.pseudo-log {
     display: flex;
     flex-direction: row;
-    padding: 0 30px 0 30px;
+    gap: 20px;
 }
-#title_base h1{
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-}
-#title_base img{
+
+#title_base img {
     width: 85px;
 }
-#title_base a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+#title_base a {
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
-#title_base ul{
+
+#title_base ul {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    flex: 1;
     gap: 5%;
-    flex-direction: row;
 }
 
-#title_base li{
+#title_base li {
     list-style: none;
-    
 }
 
-#home-header {
+
+/*********************** HOME GENERAL **************************/
+
+#body-home {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/img/pest.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+/*********************** HOME NAV BAR CATEGORY*********************/
+#category-nav-home-page {
+    min-height: 10vh;
     position: relative;
-    min-height: 60vh;
 }
- 
+
+.video-container {
+    position: relative;
+}
+
 .videoHome {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
-    z-index: 1;
+    max-height: 70vh;
     object-fit: cover;
+    filter: brightness(70%) contrast(120%); /* Ajoutez le filtre ici */
 }
 
-.video-home-page::before {
-    content: "";
+.nav-home-page {
+    padding-top: 25px;
+    list-style: none;
+    margin: 0;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 2;
-}
-
-.video-home-page p {
-    font-size: 2em;
-    z-index: 2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-}
-
-#img-header{
-    object-fit: cover;
-    object-position: 50% 50%;
-    padding: 50px;
-}
-
-.theme{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
 }
-
-/**************CATEGORY*************/
-
 .category_nav{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    list-style: none;
-    gap: 30px;
+    gap: 25px;
+
 }
-.category_nav a{
+.category_nav a {
     text-decoration: none;
-    color: black;
-    font-size: 1.2em;
+    color: white;
+    font-size: 1.6em;
     border-radius: 5px;
     padding: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Ajoutez une transition pour une animation fluide */
 }
+
 .category_nav a:hover {
     background: #282828;
     color: white;
 }
 
+#category-nav-home-page p {
+    font-size: 8em;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+
+
+/***********************INDEX CATEGORY*********************/
 .index_category{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
+/*******************************  THEME  *************************/
 
 .banniere-theme {
     min-height: 60vh;
@@ -190,13 +175,17 @@ title {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
 }
 
-.img-banniere-theme figure{
+.img-banniere-theme figure {
     height: 400px;
+    position: relative;
 }
 
 .img-banniere-theme img {
+    opacity: 0.8;
+    filter: brightness(70%) contrast(120%);
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -206,19 +195,138 @@ title {
     font-size: 3em;
     position: absolute;
     text-align: center;
-    bottom: 50%;
+    bottom: 35%; 
     left: 50%;
+    transform: translate(-50%, -50%);
     color: #fff;
 }
+
+/*************CARD THEME ***************/
+ 
+/* Styles pour la section d'événements par thème */
+
+/* Styles pour la section d'événements par thème */
+#theme-events {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Styles pour la carte d'événement */
+.theme-event-card {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    width: 30%;
+}
+.theme-event-card a{
+    position: relative;
+}
+
+
+.theme-event-card:hover {
+    transform: scale(1.05);
+}
+
+/* Styles pour le titre de l'événement */
+.theme-event-card h3 {
+    margin: 10px;
+    font-size: 2em;
+    text-align: center;
+}
+
+/* Styles pour l'image de l'événement */
+/* .theme-event-image-container {
+    overflow: hidden;
+} */
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Styles pour l'icône de cœur */
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+
+/* Styles pour la section d'icônes et de texte de l'événement */
+.event-icons-and-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Styles pour le bouton de participation */
+.event-icons a:first-child {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+.theme-event-icons{
+    display: flex;
+    gap: 50px;
+}
+
+.theme-event-icons a:first-child:hover {
+    color: green;
+}
+.theme-event-icons .fa-thumbs-down:hover{
+    color: red;
+
+}
+/* Styles pour les autres icônes de l'événement */
+.theme-event-icons a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.6em;
+    margin: 0 5px;
+}
+
+/* Styles pour le texte de l'événement */
+.theme-event-icons-and-text p {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Styles pour l'avatar en cercle du participant */
+.event-circle-avatar {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+}
+
 
 
 /********************HOME PAGE*******************/
 
-#category-nav-home-page{
-    min-height: 10vh;
-}
 
 .title-event-home{
+    color: white;
     text-align: center;
     font-size: 2em;
 }
@@ -230,7 +338,7 @@ title {
     flex-direction: column;
 }
 #main-home-page{
-    min-height: 30vh;
+    min-height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -249,16 +357,16 @@ title {
     border-radius: 5px;
     font-size: 1.5em;
 }
-.icons-events{
+.home-caption-icons-events{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 }
-.icons-events i{
+.home-caption-icons-events i{
     color: black;
 }
-.icons-events i:hover{
+.home-caption-icons-events i:hover{
     color: blue;
     
 }
@@ -268,95 +376,170 @@ background-color: white;
 
 }
 
+/*******************QUI SOMMES NOUS ********************/
+
+.about-section {
+    display: flex;
+    align-items: center;
+    opacity: 0.8; /* Ajoutez l'opacité ici (la valeur peut varier de 0 à 1) */
+    margin: 30px 9% 0px 9%;
+    padding: 50px 0;
+    border-radius: 8px;
+    box-shadow: 20px 25px 25px 20px rgba(0, 0, 0, 0.2); /* Ajoutez le relief ici */
+}
+
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content h2 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    color: white;
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-content .learn-more {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.about-content .learn-more:hover {
+    color: #ff7f50;
+}
 
 /****************COMMENTAIRES************/
+#comment-home-page {
+    margin: 30px 9% 30px 9%;
+    padding: 50px 20px;
+    border-radius: 8px;
+}
 
-#comment-home-page{
+.comment-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.comment-intro {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.comment-list {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
-.title-commentaire-home{
-    min-height: 30vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+
+.comment {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
-.title-commentaire-home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.comment-date {
+    color: #888;
+    font-size: 0.9em;
 }
-.card-home-avis{
+
+.edit-link {
+    /* Ajoutez des styles spécifiques pour le lien d'édition si nécessaire */
+    color: #007bff;
+    text-decoration: underline;
+}
+
+
+/**********************EXPERIENCE***********************/
+
+
+
+/* Titre de l'expérience d'événement */
+.experience-event-title {
+    text-align: left; /* Aligner le texte à gauche */
+    color: #333;
+    font-size: 36px;
+}
+.experience-event-block{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-    width: 70%;
-    gap: 30px;
-}
-
-
-.card-home-page{
-    display: flex;
-    flex-direction: column;
-    gap: 20;
-}
-#slide{
-    /* position: absolute; */
-    height: 50vh;
-    border-style: ridge;
-    border-color: black;
-    border-width: thin;
-    width: 25%;
+    background-color: #f0f0f0;
+    filter: brightness(0.8);
+    margin: 10%;
     border-radius: 5px;
-    padding: 25px;
 }
-
-/**********************PARALLAX***********************/
-
-#parallax {
-    background-image: url("/img/randonnée.jpg");
-    display: flex;
-    justify-content: center;
-    min-height: 400px;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-#parallax img {
-    object-fit: cover;
-    object-position: 50% 50%;
-    height: 100%;
-    width: 100%
-}
-.parallax-block {
+/* Texte de l'expérience d'événement */
+.experience-event-text {
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: black;
+    justify-content: center;
+    font-size: 18px;
+    padding: 0 20px 0 20px;
+    width: 100%;
     gap: 20px;
 }
-.parallax-block button {
-    padding: 10px;
-    width: 13%;
-    font-size: 1.2em;
-    border-style: ridge;
-    border-color: black;
-    color: black;
-    border-radius: 11px;
-    background: rgba(0, 0, 0, 0.0);
-}
-.parallax-block p {
-    font-size: 1.2em;
+
+.experience-event-text p{
+    text-align: justify;
 }
 
+/* Bouton de l'expérience d'événement */
+.experience-event-button {
+    display: inline-block;
+    background-color: #007bff; /* Couleur du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+}
 
+/* Conteneur d'image de l'expérience d'événement */
+.experience-event-image-container {
+    text-align: center; /* Centrer l'image  */
+}
+.experience-event-image-container figure{
+    margin: 0;
+}
+
+/* Image de l'expérience d'événement */
+.experience-event-image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère autour de l'image */
+}
+
+a.lets-go-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5757; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    text-decoration: none; /* Supprimer le soulignement du texte */
+    border-radius: 5px; /* Coins arrondis */
+    transition: background-color 0.3s ease-in-out; /* Transition fluide de la couleur de fond */
+
+    /* Ajoutez d'autres styles spécifiques à votre lien ici */
+}
+
+/* Effet hover sur le lien */
+a.lets-go-link:hover {
+    background-color: #e74c3c; /* Nouvelle couleur de fond au survol */
+}
 /***********************FOOTER******************/
 
 footer{
@@ -367,8 +550,7 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-image: url("/img/footer.jpg");
-    /* background: linear-gradient(4deg, rgba(12,2,35,1) 0%, rgba(24,23,73,1) 41%, rgba(60,125,184,1) 100%); */
+    background: black;
     color: white;
     padding: 50px 0px 20px 0px;
 }
@@ -411,7 +593,7 @@ small{
 
 /**************************CATEGORY*************************/
 #theme-category {
-    min-height: 100vh;
+    height: 400px;
 }
 
 .detail-theme-category {
@@ -520,19 +702,15 @@ small{
     top: 10px;
     right: 10px;
     font-size: 24px;
-    color: red;
+    color: white;
     z-index: 1;
+    transition: color 0.3s ease-in-out; /* Transition fluide de la couleur */
+}
+/* Effet hover sur l'icône de cœur */
+.heart-icon:hover {
+    color: red; /* Nouvelle couleur au survol (rouge) */
 }
 
-figcaption {
-    background-color: #f8f8f8;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transform: rotateX(0) rotateY(0);
-    transition: transform 0.5s, box-shadow 0.5s;
-}
 
 figcaption:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
@@ -544,7 +722,7 @@ figcaption h3 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.icons-events {
+/* .icons-events {
     margin-bottom: 15px;
 }
 
@@ -557,13 +735,8 @@ figcaption h3 {
 
 .icons-events a:hover {
     color: green;
-}
+} */
 
-p {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-}
 
 .edit-link {
     color: #27ae60;
@@ -581,61 +754,127 @@ p {
     align-items: center;
 }
 
-.icons-events {
+/* .icons-events {
     display: flex;
     gap: 10px;
-}
+} */
 
-p {
-    margin-left: auto;
-}
 
-/* Styles pour les cartes */
 #card-home-page {
     margin: 30px 0 30px 0;
+    height: 100%;
     display: flex;
-    flex-flow: row wrap;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
 }
 
-#card-home-page-event {
+.card-home-page-event {
     transition: transform .2s;
-    float: left;
-    width: 25%;
+    width: 25%; 
+    box-shadow: 3px 4px 8px 3px rgb(0 0 0 / 73%);
     text-align: center;
     overflow: hidden;
+    position: relative;
+    height: 600px;
+}
+.card-home-page-event h3{
+    color: white;
+    position: absolute;
+    top: 50%;
+    padding: 0 30px 0 30px;
+    z-index: 2;
 }
 
-#card-home-page-event:hover {
-    -ms-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+.card-home-page-event figure {
+    height: 100%; /* ou la hauteur souhaitée */
+    position: relative;
 }
 
-#card-home-page-event img {
+.card-home-page-event:hover {
+    transform: scale(1.05);
+}
+
+.card-home-page-event img {
+    border-radius: 3px;
+    opacity: 50%;
+    filter: brightness(0.8);
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
     object-fit: cover;
 }
 
-#card-home-page-event figcaption {
+.event-details{
     display: flex;
     flex-direction: column;
-    gap: 9px;
-    text-align: center;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 10px;
+    top: 0%;
+    left: 25%;
+    height: 100%;
+    position: absolute;
 }
+
+
+.event-details p {
+    color: white;
+    margin: 0;
+    font-size: 20px;
+
+}
+
+.home-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.card-home-page-event:hover .home-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-home-page-event .home-caption p {
+    margin: 0;
+}
+
+.event-icons-events {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-icons-events i {
+    color: white;
+}
+
+.event-icons-events i:hover {
+    color: green;
+}
+
+
 
 
 /**********PARTICIPANT EVENT AVATAR***************/
 
 /* Ajoutez cette classe pour styliser les cercles */
-.circle-avatar {
+.card-event-circle-avatar {
     display: inline-block;
     width: 30px; /* Ajustez la taille du cercle selon vos besoins */
     height: 30px; /* Ajustez la taille du cercle selon vos besoins */
     /* background-color: #3498db; Couleur de fond du cercle */
-    color: black; /* Couleur du texte dans le cercle */
+    color: white; /* Couleur du texte dans le cercle */
     text-align: center;
     border-radius: 50%; /* Rend le div en forme de cercle */
     line-height: 30px; /* Centre le texte verticalement */
@@ -650,10 +889,180 @@ p {
 }
 
 
+/*****************detail de chaque event*******************/
+.titre-event{
+    margin: 30px;
+    text-align: center;
+}
+
+/* .event-detail-body {
+    height: 100vh;
+} */
+.event-detail-body h1{
+    color: white;
+    text-align: center;
+}
+
+/* Conteneur principal de la liste d'événements */
+.event-list-container {
+    width: 100%;
+}
+
+/* Titre de la liste d'événements */
+.event-list-title {
+    text-align: center;
+    color: #333;
+}
+
+/* Styles pour l'image de l'événement */
+.event-image-container {
+    overflow: hidden;
+    height: 100%;
+}
+
+/* Image de l'événement dans la liste */
+.event-image-container img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    filter: brightness(0.5);
+}
+
+/* Message s'il n'y a pas d'image dans l'événement */
+.no-image-message {
+    text-align: center;
+    color: #888;
+}
+
+/* Styles pour la page de détails de l'événement */
+
+/* Conteneur principal de la page de détails de l'événement */
+.event-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    padding: 10px;
+    top: 0%;
+    height: 100%;
+    position: absolute;
+}
+
+.event-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* Couleur de fond de la page */
+}
+.container-image-event-back{
+    position: relative;
+    height: 601px;
+}
+.container-card-image{
+    height: 100%;
+    width: 100%;
+}
+/* Carte contenant les détails de l'événement */
+.event-card {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 400px;
+    width: 35%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+.event-card figure{
+    height: 100%;
+    margin: 0;
+}
+/* Image de l'événement sur la carte */
+.event-card img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.5);
+    transition: filter 0.3s ease-in-out;
+}
+
+/* Effet hover sur l'image de l'événement */
+.event-card:hover img {
+    filter: brightness(1);
+}
+
+/* Conteneur d'informations de l'événement sur la carte */
+.event-info {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 15%;
+    left: 55%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 400px;
+    width: 35%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    background-image: url(/img/sunset.jpg);
+    padding: 20px;
+    gap: 15px;
+}
+
+/* Titre de l'événement sur la carte */
+.event-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+}
+
+
+/* Section des participants de l'événement sur la carte */
+.event-participants {
+    font-size: 16px;
+}
+
+/* Titre de la section des participants */
+.event-participants h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+/* Liste des participants */
+.event-participants ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Éléments de la liste des participants */
+.event-participants li {
+    margin-bottom: 4px;
+}
+
+/* Message s'il n'y a pas d'image dans l'événement sur la page de détails */
+.no-image-message {
+    text-align: center;
+    color: #888;
+}
+
+
+/*************************PAGE PROFIL*******************************/
+
 
 /********************RESPONSIVE TABLETTE*************/
 /* Ajoutez ces règles de médias pour les tablettes */
-@media only screen and (max-width: 768px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1020px){
     /* Général */
     body {
         font-size: 14px;
@@ -690,8 +1099,22 @@ p {
     }
 
     /* Cartes et éléments de la page d'accueil */
-    #card-home-page-event {
-        width: 50%;
+    .card-home-page-event {
+        transition: transform .2s;
+        width: 45%;
+        box-shadow: 3px 4px 8px 3px rgb(0 0 0 / 73%);
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+        height: 400px;
+    }
+    .home-caption{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
     }
 
     .icons-events i {
@@ -701,7 +1124,32 @@ p {
     .edit-link {
         font-size: 0.9em;
     }
-
+    .experience-event-text{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        padding: 30px 30px 30px 30px;
+        width: 100%;
+        gap: 20px;
+    }
+    .experience-event-image-container img {
+        width: 100%;
+        object-fit: cover;
+        height: 400px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .experience-event-block{
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: #f0f0f0;
+        filter: brightness(0.8);
+        margin: 10%;
+        border-radius: 5px;
+    }
     /* Catégorie et thème */
     .detail-theme-category a {
         font-size: 1em;
@@ -722,10 +1170,10 @@ p {
     }
 }
 
-/************************RESPONSIVE MOBIl******************/
+/************************RESPONSIVE MOBIlE******************/
 
 /* Ajoutez ces règles de médias pour les écrans mobiles */
-@media only screen and (max-width: 480px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 
     /********************* GÉNÉRAL *********************/
 
@@ -774,7 +1222,21 @@ p {
         position: relative;
         display: inline-block;
     }
-
+    .category_nav{
+        display: flex;
+        gap: 10px;
+    }
+    .nav-home-page{
+        padding: 25px;
+        list-style: none;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;    
+    }
 
     /* Contenu du dropdown (masqué par défaut) */
     .dropdown-content {
@@ -785,6 +1247,8 @@ p {
         box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         z-index: 1;
     }
+
+    
 
     /* Liens à l'intérieur du dropdown */
     .dropdown-content a {
@@ -807,11 +1271,25 @@ p {
     .title-event-home {
         font-size: 1.2em;
     }
-
-    #card-home-page-event {
-        width: 100%;
+    #card-home-page{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
     }
-
+    .card-home-page-event {
+        height: 300px;
+        width: 60%;
+    }
+    .home-caption{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
     .icons-events i {
         font-size: 1em;
     }
@@ -819,7 +1297,18 @@ p {
     .edit-link {
         font-size: 0.8em;
     }
+    /**************************EXPERIENCE BLOCK*******************/
 
+    .experience-event-block {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 15px;
+        background-color: #f0f0f0;
+        filter: brightness(0.8);
+        margin: 10%;
+        padding-bottom: 30px;
+        border-radius: 5px;
+    }
     /********************* CATÉGORIE ET THÈME *********************/
 
     .detail-theme-category a {
@@ -844,5 +1333,6 @@ p {
         color: white;
         text-align: center;
     }
+
 }
 
