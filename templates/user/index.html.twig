@@ -1,25 +1,88 @@
 {% extends 'profil.html.twig' %}
 
-{% block title %}page profil{% endblock %}
+{% block title %}Page profil{% endblock %}
 
 {% block body %}
 
-<div >
-    <div>{{app.user.pseudo}}</div>
-    <div>age</div>
-</div>
+<div class="profil-container">
 
-<div>
-    {# mes events ({{app.user.events|length }}) #}
-</div>
-{# {% for event in app.user.events %}
-    {{ event.description }}<br>
-    {# Ajoutez d'autres propriétés d'événement que vous souhaitez afficher #}
-{# {% endfor %}  #}
+    <div class="profile-section">
 
-<div>
-    mes favoris
-</div>
+        {# <h2 class="profile-title">{{ app.user.pseudo }}</h2> #}
+        <h2>Mon Profil</h2>
+        
+        <div class="profil-participation-section">
+            <h3>Événements auxquels je participe ({{ app.user.participant|length }}) :</h3>
+            {% if app.user.participant is not empty %}
+                <ul class="profil-event-list-participed">
+                    {% for event in app.user.participant %}
+                        <li class="profil-event-details-participed">
+                        {% if event.picture is not null %}
+                        <figure>
+                            <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
+                        </figure>
+                        {% endif %}                           
+                         {{ event.description }} - {{ event.dateDebut|date('Y-m-d') }}
+                        </li>
+                        <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
+                        <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="profil-no-events">Aucun événement auquel je participe pour le moment.</p>
+            {% endif %}
+        </div>
 
+        <div class="profil-proposed-events-section">
+            <h3>Mes événements proposés ({{ app.user.event|length }}) :</h3>
+            <div class="profil-event-proposed">
+                {% if app.user.event is not empty %}
+                    <div class="profil-event-list">
+                        {% for event in app.user.event %}
+                            <p class="profil-event-details">
+                                {% if event.picture is not null %}
+                                <figure>
+                                    <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
+                                </figure>
+                                {% endif %}
+                            </p>
+                            {% if event.isParticipant(app.user) %}
+                                <span>Vous participez déjà à cet événement.</span>
+                            {% else %}
+                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+                            {% endif %}
+                            <p>{{ event.description }}</p>
+                            <p>{{ event.dateDebut|date('Y-m-d') }}</p>
+                            <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
+                            <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                            <p>delete</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="profil-no-events">Pas d'événement proposé pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="profil-favorites-section">
+            <h3>Mes favoris :</h3>
+            {# {% if app.user.favoriteEvents is not empty %}
+                <ul class="event-list">
+                    {% for favoriteEvent in app.user.favoriteEvents %}
+                        <li class="event-details">
+                            <img src="{{ asset(favoriteEvent.picture) }}" alt="Event Image">
+                            {{ favoriteEvent.description }} - {{ favoriteEvent.dateDebut|date('Y-m-d') }}
+                            Ajoutez ici tout code supplémentaire pour gérer les événements favoris
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-events">Pas d'événement favori pour le moment.</p>
+            {% endif %} #}
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

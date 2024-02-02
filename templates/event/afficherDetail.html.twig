@@ -31,21 +31,33 @@
                     <!-- Section des participants de l'événement -->
                     <div class="event-details"> 
                         <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
-                        <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} 
-                        </p>
-                        {% if event.participants|length > 0 %}
-                        {% for participant in event.participants %}
-                        <span class="card-circle-avatar">{{ participant.pseudo }}</span><br>{% if not loop.last %}    {% endif %}
-                        {% endfor %}
+                        {% if event.available %}
+                            <p class="event-status">Cet événement est disponible.</p>
+                        {% else %}
+                            <p class="event-status">Cet événement n'est plus disponible.</p>
                         {% endif %}
-                    </p>
-                            <div class="event-icons-events">
-                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
+                        <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
+                        <div class="avatar">
+                            {% if event.participants|length > 0 %}
+                                {% for participant in event.participants %}
+                                    <span class="card-circle-avatar">{{ participant.pseudo }}</span><br>{% if not loop.last %}    
                                 {% endif %}
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
+                        <div class="event-icons-events">
+                            {% if event.isParticipant(app.user) %}
+                                <span>Vous participez déjà à cet événement.</span>
+                            {% else %}
+                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+                            {% endif %}
+                            <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
+                            <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                        </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

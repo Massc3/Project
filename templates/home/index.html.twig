@@ -46,7 +46,7 @@
                         <div class="card-home-page-event">
                             <!-- Vérification si l'événement a une image définie -->
                             {% if event.picture is defined %}
-                            <figure>
+                                <figure>
                                     <h3>{{ event.description }}</h3>
                                     <!-- Lien vers les détails de l'événement avec image -->
                                     <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
@@ -83,14 +83,20 @@
                             <!-- Légende de la carte avec lien de participation, icônes d'édition et description de l'événement -->
                             <figcaption class="home-caption">
                                 <div class="message-complet-event">
-                                    {% if event.participants | length < event.note %}
-                                        <a href="{{ path('participate_event', {'id': event.id}) }}"></a>
+                                    {% if event.participants|length < event.note %}
+                                        {% if event.isParticipant(app.user) %}
+                                            <span>Vous participez déjà à cet événement.</span>
+                                        {% else %}
+                                            <a href="{{ path('participate_event', {'id': event.id}) }}"></a>
+                                        {% endif %}
                                     {% else %}
                                         <strong><p class="event-complet">Complet</p></strong>
                                     {% endif %}
                                 </div>
                                 <div class="home-caption-icons-events">
-                                    <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
+                                    {% if not event.isParticipant(app.user) %}
+                                        <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
+                                    {% endif %}
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
                                     {% endif %}

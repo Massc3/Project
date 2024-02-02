@@ -40,14 +40,14 @@
                 <figcaption>
                     <div class="event-icons-and-text">
                         <div class="theme-event-icons">
-                            {# {% if theme.isParticipant(app.user) %}
-                            <span>Vous participez déjà à un événement de ce thème.</span>
+                            {% if event.isParticipant(app.user) %}
+                                <span>Vous participez déjà à cet événement.</span>
                             {% else %}
-                            <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
                             {% endif %}
-                            <a href="{{ path('withdraw_event', {'id': event.id})}}"><i class="fa-solid fa-thumbs-down"></i></a> #}
+                            <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
                             <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
-                        </div>
+                        </div>                        
                         <p> {{ event.participants|length }} / {{ event.note }}
                             {% if event.participants|length > 0 %}
                                 <br>

@@ -722,21 +722,6 @@ figcaption h3 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* .icons-events {
-    margin-bottom: 15px;
-}
-
-.icons-events a {
-    margin-right: 10px;
-    color: black;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.icons-events a:hover {
-    color: green;
-} */
-
 
 .edit-link {
     color: #27ae60;
@@ -753,11 +738,6 @@ figcaption h3 {
     justify-content: space-between;
     align-items: center;
 }
-
-/* .icons-events {
-    display: flex;
-    gap: 10px;
-} */
 
 
 #card-home-page {
@@ -776,7 +756,7 @@ figcaption h3 {
     text-align: center;
     overflow: hidden;
     position: relative;
-    height: 600px;
+    height: 500px;
 }
 .card-home-page-event h3{
     color: white;
@@ -1017,7 +997,31 @@ figcaption h3 {
     padding: 20px;
     gap: 15px;
 }
+.event-info .event-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    right: 25%;
+    padding: 10px;
+}
 
+.event-info .event-icons-events{
+    font-size: 1.6em;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.event-icons-events a:first-child:hover {
+    color: green;
+}
+.event-icons-events .fa-thumbs-down:hover{
+    color: red;
+}
 /* Titre de l'événement sur la carte */
 .event-title {
     font-size: 24px;
@@ -1169,6 +1173,117 @@ figcaption h3 {
         flex-direction: column;
     }
 }
+
+
+/**********************************PROFIL***********************************************/
+
+/* styles.css */
+
+/* styles.css */
+
+.profil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.profile-section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.profile-title {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.profil-participation-section,
+.profil-proposed-events-section,
+.profil-favorites-section {
+    height: 350px;
+    margin-top: 20px;
+}
+
+.profile-section h2{
+    text-align: center;
+    padding: 20px;
+}
+.profile-section h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.profil-participed-event{
+    width: 100%;
+}
+.profil-event-list-participed{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+.profil-event-details-participed {
+    width: 35%;
+    
+}
+
+.profil-event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 35%;
+    list-style: none;
+    padding: 0;
+}
+
+.profil-event-proposed{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.profil-no-events {
+    color: #888;
+    font-style: italic;
+}
+
+.profil-participation-section figure{
+    height: 100%;
+}
+.profil-participation-section img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.profil-proposed-events-section figure{
+    height: 100%;
+}
+.profil-proposed-events-section img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.avatar{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
 
 /************************RESPONSIVE MOBIlE******************/
 

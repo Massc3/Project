@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Event;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -45,15 +46,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'participants')]
     private Collection $participant;
 
-    #[ORM\ManyToMany(targetEntity: User::class)]
-    #[JoinTable('user_post_like')]
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'favoritedByUsers')]
+    #[JoinTable('user_favorite_event')]
     private Collection $likes;
+
+    #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'favoritedByUsers')]
+    #[ORM\JoinTable(name: 'user_favorite_event')]
+    private $favoriteEvents;
+
 
     public function __construct()
     {
         $this->event = new ArrayCollection();
         $this->participant = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->favoriteEvents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,8 +207,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeParticipant(Event $participant): static
     {
-        if ($this->participant->removeElement($participant)) {
-            $participant->removeParticipant($this);
+        if ($this->participant->contains($participant)) {
+            $this->participant->removeElement($participant);
         }
 
         return $this;
@@ -212,17 +219,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->likes;
     }
 
-    public function addLike(User $like): self
+    public function addLike(Event $event): self
     {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
+        if (!$this->likes->contains($event)) {
+            $this->likes[] = $event;
+            $event->addFavoritedByUser($this); // Assurez-vous que cette méthode est définie dans votre classe Event
         }
+
         return $this;
     }
 
-    public function removeLike(User $like): self
+    public function removeLike(Event $event): self
     {
-        $this->likes->removeElement($like);
+        $this->likes->removeElement($event);
+        $event->removeFavoritedByUser($this); // Assurez-vous que cette méthode est définie dans votre classe Event
+
+        return $this;
+    }
+    
+    public function getFavoriteEvents(): Collection
+    {
+        return $this->favoriteEvents;
+    }
+
+    public function addFavoriteEvent(Event $event): self
+    {
+        if (!$this->favoriteEvents->contains($event)) {
+            $this->favoriteEvents[] = $event;
+            $event->addFavoritedByUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteEvent(Event $event): self
+    {
+        if ($this->favoriteEvents->removeElement($event)) {
+            $event->removeFavoritedByUser($this);
+        }
 
         return $this;
     }

@@ -1,0 +1,22 @@
+{% extends 'profil.html.twig' %}
+
+{% block title %}Add to Favorites{% endblock %}
+
+{% block body %}
+
+    <h1>Add to Favorites</h1>
+
+    {# Afficher d'éventuels messages Flash après une redirection #}
+    {% for flashMessage in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {# Afficher le formulaire d'ajout aux favoris #}
+    {{ form_start(form) }}
+    {{ form_row(form.event) }}
+    <button type="submit" class="btn btn-primary">Add to Favorites</button>
+    {{ form_end(form) }}
+
+{% endblock %}

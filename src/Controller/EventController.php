@@ -103,6 +103,9 @@ class EventController extends AbstractController
      #[Route('/event/{id}', name: 'afficherDetail_event')]
      public function afficherDetail(Event $event, EventRepository $eventRepository): Response
      {
+        // Mettez à jour la disponibilité de l'événement en fonction de la date
+        $event->updateAvailability();
+
          // Charger les participants de l'événement
          $event = $eventRepository->findEventWithParticipants($event->getId());
  
@@ -170,6 +173,8 @@ class EventController extends AbstractController
         $referer = $request->headers->get('referer');
         return $this->redirect($referer);
     }
+
+    
     // #[Route('/event/{id}/share', name: 'share_event')]
     // public function shareEvent(Event $event): Response
     // {
