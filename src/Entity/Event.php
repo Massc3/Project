@@ -53,9 +53,6 @@ class Event
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'participant')]
     private Collection $participants;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteEvents')]
-    private $favoritedByUsers;
-
     #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $isAvailable = true;
 
@@ -64,7 +61,6 @@ class Event
         $this->avis = new ArrayCollection();
         $this->dateCreation = new DateTime();
         $this->participants = new ArrayCollection();
-        $this->favoritedByUsers = new ArrayCollection();
         $this->isAvailable = true; // Par défaut, l'événement est disponible
 
 
@@ -254,28 +250,7 @@ class Event
 
         return $this;
     }
-    public function getFavoritedByUsers(): Collection
-    {
-        return $this->favoritedByUsers;
-    }
-
-    public function addFavoritedByUser(User $user): self
-    {
-        if (!$this->favoritedByUsers->contains($user)) {
-            $this->favoritedByUsers[] = $user;
-            $user->addLike($this); // Assurez-vous que cette méthode est définie dans votre classe User
-        }
-
-        return $this;
-    }
-
-    public function removeFavoritedByUser(User $user): self
-    {
-        $this->favoritedByUsers->removeElement($user);
-        $user->removeLike($this); // Assurez-vous que cette méthode est définie dans votre classe User
-
-        return $this;
-    }
+    
 
     public function getIsAvailable(): ?bool
     {

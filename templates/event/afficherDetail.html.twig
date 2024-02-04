@@ -25,40 +25,46 @@
                     </div>
                     <!-- Section de l'image de l'événement avec effet hover -->
                 </div>
-                <div class="event-info"> 
-                    <!-- Titre de l'événement -->
-                    <h2 class="event-title">{{ event.description }}</h2> 
-                    <!-- Section des participants de l'événement -->
-                    <div class="event-details"> 
-                        <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
-                        {% if event.available %}
-                            <p class="event-status">Cet événement est disponible.</p>
-                        {% else %}
-                            <p class="event-status">Cet événement n'est plus disponible.</p>
-                        {% endif %}
-                        <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
-                        <div class="avatar">
-                            {% if event.participants|length > 0 %}
-                                {% for participant in event.participants %}
-                                    <span class="card-circle-avatar">{{ participant.pseudo }}</span><br>{% if not loop.last %}    
-                                {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="event-icons-events">
-                            {% if event.isParticipant(app.user) %}
-                                <span>Vous participez déjà à cet événement.</span>
+
+                {% if event.getDateDebut() > date('now') %}
+                    <div class="event-info"> 
+                        <!-- Titre de l'événement -->
+                        <h2 class="event-title">{{ event.description }}</h2> 
+                        <!-- Section des participants de l'événement -->
+                        <div class="event-details"> 
+                            <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
+                            {# {% if event.available %}
+                                <p class="event-status">Cet événement est disponible.</p>
                             {% else %}
-                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+                                <p class="event-status">Cet événement n'est plus disponible.</p>
+                            {% endif %} #}
+                            <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
+                            <div class="avatar">
+                                {% if event.participants|length > 0 %}
+                                    {% for participant in event.participants %}
+                                        <span class="card-circle-avatar">{{ participant.pseudo }}</span><br>{% if not loop.last %}    
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="event-icons-events">
+                                {% if event.isParticipant(app.user) %}
+                                    <span>Vous participez déjà à cet événement.</span>
+                                {% else %}
+                                    <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                {% endif %}
+                                <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
+                                <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                            </div>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
                             {% endif %}
-                            <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
-                            <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
                         </div>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
-                        {% endif %}
                     </div>
-                </div>
+                    {% else %}
+                    {# La date de début de l'événement est dans le passé ou actuelle #}
+                    <p class="message-not-available-event">L'événement n'est plus disponible.</p>
+                {% endif %}
             </div>
         </div>
     {# </body> #}

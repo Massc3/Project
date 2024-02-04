@@ -16,6 +16,11 @@
                     <li class="category_nav">
                         {% for category in categories %}
                             <a href="{{ path('afficherDetail_category', {'id': category.id}) }}">{{ category }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('edit_category', {'id': category.id}) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ path('delete_category', {'id': category.id}) }}" class="btn btn-danger">Supp</a>
+                                    <a href="{{path('add_category')}}" class="btn btn-success">Ajouter une categorie</a>
+                            {% endif %}
                         {% endfor %}
                     </li>
                 </ul>
@@ -47,35 +52,33 @@
                             <!-- Vérification si l'événement a une image définie -->
                             {% if event.picture is defined %}
                                 <figure>
-                                    <h3>{{ event.description }}</h3>
-                                    <!-- Lien vers les détails de l'événement avec image -->
                                     <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
+                                        <h3>{{ event.description }}</h3>
+                                        <!-- Lien vers les détails de l'événement avec image -->
                                         <img src="{{asset('img/' ~ event.picture)}}" alt="{{event.description}}" >
+                                        <!-- Détails supplémentaires de l'événement -->
+                                        <div class="event-details">
+                                            <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
+                                            <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
+                                        </div>
                                     </a>
-                                    <!-- Détails supplémentaires de l'événement -->
-                                    <div class="event-details">
-                                        <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
-                                        <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
-                                    </div>
                                     <!-- Icône de cœur -->
                                     <i class="fas fa-heart heart-icon"></i>
-                                </figure>
+                                
+                                </figure>                            
                             {% else %}
+                            {# <img src="{{ asset('img/default.png') }}" alt="image event par default" width="200" height="200"> #}
                                 <!-- Cas où l'événement n'a pas d'image définie -->
                                 <figure>
-                                    <img src="{{ asset('img/default.png') }}" alt="image event par default" width="200" height="200">
-                                    <!-- Détails supplémentaires de l'événement sans image -->
-                                    <div class="event-details">
-                                        <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
-                                        <p class="event-participants"> {{ event.participants|length }} / {{ event.note }}
-                                            {% if event.participants|length > 0 %}
-                                                <br>
-                                                {% for participant in event.participants %}
-                                                    <span class="circle-avatar">{{ participant.pseudo }}</span><br>{% if not loop.last %}    {% endif %}
-                                                {% endfor %}
-                                            {% endif %}
-                                        </p>
-                                    </div>
+                                    <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
+                                        <h3>{{ event.description }}</h3>
+                                        <!-- Lien vers les détails de l'événement avec image -->
+                                        <img src="{{ asset('img/default.png') }}" alt="image event par default" width="200" height="200">                                        <!-- Détails supplémentaires de l'événement -->
+                                        <div class="event-details">
+                                            <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
+                                            <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
+                                        </div>
+                                    </a>
                                     <!-- Icône de cœur -->
                                     <i class="fas fa-heart heart-icon"></i>
                                 </figure>
@@ -85,23 +88,19 @@
                                 <div class="message-complet-event">
                                     {% if event.participants|length < event.note %}
                                         {% if event.isParticipant(app.user) %}
-                                            <span>Vous participez déjà à cet événement.</span>
+                                            <span>Vous participez déjà à cet événement. </span>
+                                            <a href="{{ path('withdraw_event', {'id': event.id}) }}">Je ne participe plus</a>
                                         {% else %}
-                                            <a href="{{ path('participate_event', {'id': event.id}) }}"></a>
+                                            <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
                                         {% endif %}
                                     {% else %}
                                         <strong><p class="event-complet">Complet</p></strong>
-                                    {% endif %}
-                                </div>
-                                <div class="home-caption-icons-events">
-                                    {% if not event.isParticipant(app.user) %}
-                                        <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-plus fa-2x"></i></a>
                                     {% endif %}
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
                                     {% endif %}
                                 </div>
-                            </figcaption>
+                            </figcaption>                            
                         </div>
                     {% endfor %}
                 </div>

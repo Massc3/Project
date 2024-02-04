@@ -14,18 +14,20 @@
         <div class="profil-participation-section">
             <h3>Événements auxquels je participe ({{ app.user.participant|length }}) :</h3>
             {% if app.user.participant is not empty %}
-                <ul class="profil-event-list-participed">
-                    {% for event in app.user.participant %}
+            <ul class="profil-event-list-participed">
+                {% for event in app.user.participant %}
+                <div>
                         <li class="profil-event-details-participed">
                         {% if event.picture is not null %}
                         <figure>
                             <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
                         </figure>
                         {% endif %}                           
-                         {{ event.description }} - {{ event.dateDebut|date('Y-m-d') }}
+                         {{ event.description }} <br> {{ event.dateDebut|date('d-m-Y') }}
                         </li>
-                        <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
+                        <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
                         <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                    </div>
                     {% endfor %}
                 </ul>
             {% else %}
@@ -35,27 +37,38 @@
 
         <div class="profil-proposed-events-section">
             <h3>Mes événements proposés ({{ app.user.event|length }}) :</h3>
+        
             <div class="profil-event-proposed">
                 {% if app.user.event is not empty %}
                     <div class="profil-event-list">
                         {% for event in app.user.event %}
-                            <p class="profil-event-details">
-                                {% if event.picture is not null %}
-                                <figure>
-                                    <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
-                                </figure>
-                                {% endif %}
-                            </p>
-                            {% if event.isParticipant(app.user) %}
-                                <span>Vous participez déjà à cet événement.</span>
+                            {% if event.dateFin >= "now" %}
+                                <div class="events-proposé">
+                                    <p class="profil-event-details">
+                                        {% if event.picture is not null %}
+                                        <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
+                                            <figure>
+                                                <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
+                                            </figure>
+                                        </a>
+                                        {% endif %}
+                                    </p>
+                                    <p>{{ event.description }}</p>
+                                    <p>{{ event.dateDebut|date('Y-m-d') }}</p>
+                                    {% if event.isParticipant(app.user) %}
+                                        <span>Vous participez déjà à cet événement.</span>
+                                    {% else %}
+                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                        <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
+                                        <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                                    {% endif %}
+                                </div>
                             {% else %}
-                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+                                <div class="events-proposé">
+                                    <p>{{ event.description }}</p>
+                                    <p>L'événement est passé.</p>
+                                </div>
                             {% endif %}
-                            <p>{{ event.description }}</p>
-                            <p>{{ event.dateDebut|date('Y-m-d') }}</p>
-                            <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
-                            <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
-                            <p>delete</p>
                         {% endfor %}
                     </div>
                 {% else %}
@@ -63,6 +76,7 @@
                 {% endif %}
             </div>
         </div>
+        
 
         <div class="profil-favorites-section">
             <h3>Mes favoris :</h3>

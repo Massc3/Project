@@ -99,52 +99,61 @@ class EventController extends AbstractController
          return $this->redirectToRoute('app_event');
      }
  
-     // Route pour afficher les détails d'un événement
      #[Route('/event/{id}', name: 'afficherDetail_event')]
-     public function afficherDetail(Event $event, EventRepository $eventRepository): Response
-     {
+    public function afficherDetail(Event $event, EventRepository $eventRepository): Response
+    {
         // Mettez à jour la disponibilité de l'événement en fonction de la date
-        $event->updateAvailability();
+        // $event->updateAvailability();
 
-         // Charger les participants de l'événement
-         $event = $eventRepository->findEventWithParticipants($event->getId());
- 
-         // Récupérer l'image associée à l'événement
-         $picture = $event->getPicture();
- 
-         // Rendu de la vue des détails de l'événement
-         return $this->render('event/afficherDetail.html.twig', [
-             'event' => $event,
-             'participants' => $event->getParticipants(),
-             'picture' => $picture
-         ]);
-     }
+        // Vérifiez si la date de début de l'événement est passée
+        // if ($event->getDateDebut() < new \DateTime('now')) {
+        //     // Redirigez ou effectuez toute autre action appropriée pour un événement passé
+        //     return $this->redirectToRoute('page_evenement_passe'); // Remplacez par la route souhaitée
+        // }
+
+        // Charger les participants de l'événement
+        $event = $eventRepository->findEventWithParticipants($event->getId());
+
+        // Récupérer l'image associée à l'événement
+        $picture = $event->getPicture();
+
+        // Rendu de la vue des détails de l'événement
+        return $this->render('event/afficherDetail.html.twig', [
+            'event' => $event,
+            'participants' => $event->getParticipants(),
+            'picture' => $picture
+        ]);
+    }
      
  
         // Limiter la participation d'un utilisateur à un événement à la fois
     #[Route('/event/{id}/participate', name: 'participate_event')]
-    public function Participate(Event $event, EntityManagerInterface $entityManager, Request $request): Response
+    public function Participate(Event $event, EntityManagerInterface $entityManager, Request $request, $id): Response
     {
         // Obtenez l'utilisateur actuellement connecté
         $currentUser = $this->getUser();
 
-        // Vérifiez si l'utilisateur a atteint le nombre maximal de participants
-        if ($event->getNote() !== null && count($event->getParticipants()) >= $event->getNote()) {
-            $this->addFlash('error', 'Le nombre maximal de participants à cet événement a été atteint.');
+        if ($event->getDateDebut() < new \DateTime('now')) {
+            $this->addFlash('error', 'Cet événement est déjà passé. Vous ne pouvez pas participer.');
         } else {
-            try {
-                // Ajoutez l'utilisateur en tant que participant et persistez les changements
-                $event->addParticipant($currentUser);
-                $entityManager->flush();
-                $this->addFlash('success', 'Vous avez participé à l\'événement avec succès.');
-            } catch (\Exception $e) {
-                $this->addFlash('error', $e->getMessage());
+            // Vérifiez si l'utilisateur a atteint le nombre maximal de participants
+            if ($event->getNote() !== null && count($event->getParticipants()) >= $event->getNote()) {
+                $this->addFlash('error', 'Le nombre maximal de participants à cet événement a été atteint.');
+            } else {
+                try {
+                    // Ajoutez l'utilisateur en tant que participant et persistez les changements
+                    $event->addParticipant($currentUser);
+                    $entityManager->flush();
+                    $this->addFlash('success', 'Vous avez participé à l\'événement avec succès.');
+                } catch (\Exception $e) {
+                    $this->addFlash('error', $e->getMessage());
+                }
             }
-        }
 
-        // Récupérer l'URL de la page précédente et rediriger
-        $referer = $request->headers->get('referer');
-        return $this->redirect($referer);
+            // Récupérer l'URL de la page précédente et rediriger
+            $referer = $request->headers->get('referer');
+            return $this->redirect($referer);
+        }
     }
 
 
@@ -174,6 +183,21 @@ class EventController extends AbstractController
         return $this->redirect($referer);
     }
 
+    // #[Route('/event/{id}/favoris', name: 'favoris_event')]
+    // public function favori(Event $event, EntityManagerInterface $entityManager, Request $request): RedirectResponse
+    // {
+    //     // Obtenez l'utilisateur actuellement connecté
+    //     $currentUser = $this->getUser();
+    //     $eventFavori = $event->getId();
+
+    //     if ($currentUser !== $eventFavori && $event->getUser()->contains($currentUser)) {
+    //         # code...
+    //     }
+
+    //     // Récupérer l'URL de la page précédente et rediriger
+    //     $referer = $request->headers->get('referer');
+    //     return $this->redirect($referer);
+    // }
     
     // #[Route('/event/{id}/share', name: 'share_event')]
     // public function shareEvent(Event $event): Response

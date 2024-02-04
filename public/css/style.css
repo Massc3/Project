@@ -213,6 +213,28 @@ title {
     justify-content: center;
 }
 
+.theme-events-texte-none{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2em;
+    padding: 20px;
+}
+
+.ajout-theme-event{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    background-color: lightsteelblue;
+    margin: 0 35% 0 35%;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+}
+
 /* Styles pour la carte d'événement */
 .theme-event-card {
     position: relative;
@@ -353,10 +375,21 @@ title {
 
 
 .message-complet-event{
-    background-color: red;
+    display: flex;
+    flex-direction: column;
     border-radius: 5px;
     font-size: 1.5em;
 }
+.message-complet-event a{
+    text-decoration: none;
+    color: black;
+}
+
+.plus{
+    text-decoration: none;
+    background-color: #888;
+}
+
 .home-caption-icons-events{
     display: flex;
     flex-direction: row;
@@ -542,15 +575,15 @@ a.lets-go-link:hover {
 }
 /***********************FOOTER******************/
 
-footer{
-    background-color: #282828;
-
-}
+/* footer{
+background-image: url(/public/img/footer.jpg);
+} */
 .footer{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background: black;
+    background-image: url(/img/footer.jpg);
+    filter: brightness(0.5);
     color: white;
     padding: 50px 0px 20px 0px;
 }
@@ -665,12 +698,17 @@ small{
 #title-detail-theme {
     position: absolute;
     text-align: center;
+    font-size: 4em;
     top: 50%; /* Centre verticalement */
     left: 50%; /* Centre horizontalement */
     transform: translate(-50%, -50%);
     color: #fff;
     font-size: 24px; /* Ajustez la taille du texte selon vos préférences */
     z-index: 1; /* Assurez-vous que le titre est au-dessus de l'image */
+}
+
+#title-detail-theme h1{
+    font-size: 4em;
 }
 
 
@@ -843,6 +881,10 @@ figcaption h3 {
     color: green;
 }
 
+.event-plus{
+    text-decoration: none;
+    color: black;
+}
 
 
 
@@ -1030,6 +1072,13 @@ figcaption h3 {
     color: white;
 }
 
+.message-not-available-event{
+    position: relative;
+    bottom: 50%;
+    color: white;
+    left: 65%;
+font-size: 1.5em;
+}
 
 /* Section des participants de l'événement sur la carte */
 .event-participants {
@@ -1209,7 +1258,7 @@ figcaption h3 {
 .profil-participation-section,
 .profil-proposed-events-section,
 .profil-favorites-section {
-    height: 350px;
+    height: 100%;
     margin-top: 20px;
 }
 
@@ -1235,15 +1284,22 @@ figcaption h3 {
     padding: 0;
 }
 .profil-event-details-participed {
-    width: 35%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     
+}
+
+.profil-event-list-participed ul{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .profil-event-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
-    width: 35%;
     list-style: none;
     padding: 0;
 }
@@ -1251,10 +1307,13 @@ figcaption h3 {
 .profil-event-proposed{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     width: 100%;
     gap: 10px;
 }
+.events-proposé{
+    height: 100%;
+}
+
 
 .profil-no-events {
     color: #888;
@@ -1262,7 +1321,7 @@ figcaption h3 {
 }
 
 .profil-participation-section figure{
-    height: 100%;
+    height:200px;
 }
 .profil-participation-section img{
     object-fit: cover;
@@ -1271,7 +1330,7 @@ figcaption h3 {
 }
 
 .profil-proposed-events-section figure{
-    height: 100%;
+    height: 50%;
 }
 .profil-proposed-events-section img{
     object-fit: cover;

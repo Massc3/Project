@@ -22,45 +22,60 @@
 
 
     <section id="theme-events">
-        {% for event in pagination %}
-            <div class="theme-event-card">
-                {% if event.picture is defined %}
-                    <h3>{{ event.description }}</h3>
-                    <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
-                        <figure class="theme-event-image-container">         
-                            <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" class="event-image">
-                            <i class="fas fa-heart heart-icon"></i>
-                        </figure>
-                    </a>
-                {% else %}
-                    <figure>
-                        <img src="{{ asset('img/parc.png') }}" alt="Image event par défaut" width="200" height="200">
-                    </figure>
-                {% endif %}
-                <figcaption>
-                    <div class="event-icons-and-text">
-                        <div class="theme-event-icons">
-                            {% if event.isParticipant(app.user) %}
-                                <span>Vous participez déjà à cet événement.</span>
-                            {% else %}
-                                <a href="{{ path('participate_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-up"></i></a>
+        {% if pagination is empty %}
+        <div class="theme-events-texte-none">
+            <p>Aucun événement n'est proposé dans ce thème pour le moment.</p><br>
+            <p>Propose ton premier eventement</p>
+        </div>
+        {% else %}
+            
+            {% for event in pagination %}
+                {% if event.dateDebut > date('now') %}
+
+                    <div class="theme-event-card">
+                        {% if event.picture is defined %}
+                            <h3>{{ event.description }}</h3>
+                            <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
+                                <figure class="theme-event-image-container">         
+                                    <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" class="event-image">
+                                    <i class="fas fa-heart heart-icon"></i>
+                                </figure>
+                            </a>
+                        {% else %}
+                            <figure>
+                                <img src="{{ asset('img/parc.png') }}" alt="Image event par défaut" width="200" height="200">
+                            </figure>
+                        {% endif %}
+                        <figcaption>
+                            <div class="event-icons-and-text">
+                                <div class="theme-event-icons">
+                                    {% if event.isParticipant(app.user) %}
+                                        <span>Vous participez déjà à cet événement.</span>
+                                    {% else %}
+                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                    {% endif %}
+                                    <a href="{{ path('withdraw_event', {'id': event.id}) }}">Ne plus participer</a>
+                                    <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                                </div>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('edit_event', {'id': event.id}) }}" class="">Edit</a>
                             {% endif %}
-                            <a href="{{ path('withdraw_event', {'id': event.id}) }}"><i class="fa-solid fa-thumbs-down"></i></a>
-                            <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
-                        </div>                        
-                        <p> {{ event.participants|length }} / {{ event.note }}
-                            {% if event.participants|length > 0 %}
-                                <br>
-                                {% for participant in event.participants %}
-                                    <span class="event-circle-avatar">{{ participant.pseudo }}</span>{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </p>                        
+                                </div>                        
+                                <p> {{ event.participants|length }} / {{ event.note }}
+                                    {% if event.participants|length > 0 %}
+                                        <br>
+                                        {% for participant in event.participants %}
+                                            <span class="event-circle-avatar">{{ participant.pseudo }}</span>{% if not loop.last %}, {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>                        
+                            </div>
+                            {# <a href="{{ path('edit_event', {'id': event.id}) }}" class="event-edit-link">Edit</a> #}
+                        </figcaption>
                     </div>
-                    {# <a href="{{ path('edit_event', {'id': event.id}) }}" class="event-edit-link">Edit</a> #}
-                </figcaption>
-            </div>
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </section>
 
     
@@ -70,6 +85,6 @@
     </div>
 
 
-    <a href="{{ path('add_event', {'themeId': theme.id}) }}" type="button" class="btn btn-success">Ajouter un événement</a><br>
+    <a href="{{ path('add_event', {'themeId': theme.id}) }}" class="ajout-theme-event">Ajouter un événement</a><br>
 
 {% endblock %}

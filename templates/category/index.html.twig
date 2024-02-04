@@ -21,6 +21,7 @@
                     <td>
                         <a href=" {{ path('delete_category', {'id' :category.id}) }}" class="btn btn-danger">Supp</a>
                     </td>
+                    <a href="{{path('add_category')}}" class="btn btn-success">Ajouter une categorie</a>
                 {% endif %}
             </ul>          
                 
@@ -29,7 +30,6 @@
         </nav>
     </section>
 
-    <a href="{{path('add_category')}}" class="btn btn-success">Ajouter une categorie</a>
 
 
 {% endblock %}
