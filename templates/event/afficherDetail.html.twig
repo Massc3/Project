@@ -4,9 +4,6 @@
 
 {% block body %}
 
-    <!-- Titre de la page avec la description de l'événement -->
-    <h1 class="titre-event">{{ event.description }}</h1>
-
     <!-- Corps de la page avec une classe pour le style CSS -->
     {# <body class="event-detail-body"> #}
 
@@ -20,7 +17,6 @@
                     <div class="container-card-image">
                         <figure class="event-image-container-hover">
                             <img src="{{ asset('img/' ~ event.picture) }}" alt="Détail de l'image de l'événement">
-                            <i class="fas fa-heart heart-icon"></i>
                         </figure>
                     </div>
                     <!-- Section de l'image de l'événement avec effet hover -->
@@ -29,7 +25,7 @@
                 {% if event.getDateDebut() > date('now') %}
                     <div class="event-info"> 
                         <!-- Titre de l'événement -->
-                        <h2 class="event-title">{{ event.description }}</h2> 
+                        <h1 class="titre-event">{{ event.description }}</h1>
                         <!-- Section des participants de l'événement -->
                         <div class="event-details"> 
                             <p class="event-date">Date : {{ event.dateDebut | date('d/m/Y') }}</p>
@@ -41,19 +37,20 @@
                             <p class="event-participants"> {{ event.participants|length }} / {{ event.note }} </p>
                             <div class="avatar">
                                 {% if event.participants|length > 0 %}
-                                    {% for participant in event.participants %}
-                                        <span class="card-circle-avatar">{{ participant.pseudo }}</span><br>{% if not loop.last %}    
-                                    {% endif %}
-                                    {% endfor %}
+                                {% for participant in event.participants %}
+                                    <a href="{{ path('view_user_profile', {'id': participant.id}) }}" class="event-circle-avatar">{{ participant.pseudo }}</a>
+                                    {% if not loop.last %}, {% endif %}
+                                {% endfor %}                            
                                 {% endif %}
                             </div>
                             <div class="event-icons-events">
                                 {% if event.isParticipant(app.user) %}
                                     <span>Vous participez déjà à cet événement.</span>
+                                    {# Afficher le lien "Ne plus participer" uniquement si l'utilisateur participe déjà #}
+                                    <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
                                 {% else %}
                                     <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
                                 {% endif %}
-                                <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
                                 <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
                             </div>
                             {% if is_granted('ROLE_ADMIN') %}

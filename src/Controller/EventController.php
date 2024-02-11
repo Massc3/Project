@@ -34,58 +34,58 @@ class EventController extends AbstractController
          ]);
      }
  
-     // Routes pour créer ou éditer des événements
      #[Route('^/admin/{themeId}/event/new', name: 'add_event')]
      #[Route('/admin/event/{id}/edit', name: 'edit_event')]
      public function new_edit(Event $event = null, Request $request, EntityManagerInterface $entityManager, ThemeRepository $themeRepository, $themeId = null, PictureService $pictureService): Response
      {
-         // Si aucun événement n'est fourni, créez-en un nouveau avec une image par défaut
-         if (!$event) {
-             $event = new Event();
-             $event->setPicture('parc.jpg');
-         }
- 
-         // Si un themeId est fourni, associez-le à l'événement
-         if ($themeId !== null) {
-             $theme = $themeRepository->find($themeId);
- 
-             if ($theme) {
-                 $event->setTheme($theme);
-             }
-         }
- 
-         // Création et traitement du formulaire pour ajouter/éditer des événements
-         $form = $this->createForm(EventType::class, $event);
-         $form->handleRequest($request);
- 
-         // Récupération des informations sur le thème en utilisant le themeId fourni
-         $theme = $themeRepository->find($themeId);
- 
-         // Obtenez l'utilisateur actuellement connecté
-         $currentUser = $this->getUser();
- 
-         // Gérer la soumission du formulaire
-         if ($form->isSubmitted() && $form->isValid()) {
-             // Assurez-vous que l'utilisateur actuel est assigné à l'événement
-             $event->setUser($currentUser);
- 
-             // ...
- 
-             // Persister l'événement dans la base de données
-             $entityManager->persist($event);
-             $entityManager->flush();
- 
-             // Rediriger vers l'URL du thème
-             $themeUrl = $this->generateUrl('afficherDetail_theme', ['id' => $themeId]);
-             return $this->redirect($themeUrl);
-         }
- 
-         // Rendu de la vue du formulaire nouvel/édit événement
-         return $this->render('event/new.html.twig', [
-             'formAddEvent' => $form,
-             'edit' => $event->getId()
-         ]);
-     }
+        // Si aucun événement n'est fourni, créez-en un nouveau
+        if (!$event) {
+            $event = new Event();
+        }
+    
+        // Si un themeId est fourni, associez-le à l'événement
+        if ($themeId !== null) {
+            $theme = $themeRepository->find($themeId);
+    
+            if ($theme) {
+                $event->setTheme($theme);
+            }
+        }
+    
+        // Création et traitement du formulaire pour ajouter/éditer des événements
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+    
+        // Obtenez l'utilisateur actuellement connecté
+        $currentUser = $this->getUser();
+    
+        // Gérer la soumission du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Assurez-vous que l'utilisateur actuel est assigné à l'événement
+            $event->setUser($currentUser);
+    
+            // Gérez le téléchargement de l'image
+            $imageFile = $form->get('picture')->getData();
+            if ($imageFile) {
+                $newFilename = $pictureService->upload($imageFile); // Méthode à créer dans votre service PictureService
+                $event->setPicture($newFilename);
+            }
+    
+            // Persister l'événement dans la base de données
+            $entityManager->persist($event);
+            $entityManager->flush();
+    
+            // Rediriger vers l'URL du thème
+            $themeUrl = $this->generateUrl('afficherDetail_theme', ['id' => $themeId]);
+            return $this->redirect($themeUrl);
+        }
+    
+        // Rendu de la vue du formulaire nouvel/édit événement
+        return $this->render('event/new.html.twig', [
+            'formAddEvent' => $form->createView(),
+            'edit' => $event->getId()
+        ]);
+    }
  
      // Route pour supprimer un événement
      #[Route('/event/{id}/delete', name: 'delete_event')]

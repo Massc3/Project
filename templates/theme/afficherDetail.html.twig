@@ -38,7 +38,6 @@
                             <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
                                 <figure class="theme-event-image-container">         
                                     <img src="{{ asset('img/' ~ event.picture) }}" alt="{{ event.description }}" class="event-image">
-                                    <i class="fas fa-heart heart-icon"></i>
                                 </figure>
                             </a>
                         {% else %}
@@ -51,10 +50,11 @@
                                 <div class="theme-event-icons">
                                     {% if event.isParticipant(app.user) %}
                                         <span>Vous participez déjà à cet événement.</span>
+                                        {# Afficher le lien "Ne plus participer" uniquement si l'utilisateur participe déjà #}
+                                        <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
                                     {% else %}
                                         <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
                                     {% endif %}
-                                    <a href="{{ path('withdraw_event', {'id': event.id}) }}">Ne plus participer</a>
                                     <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
                                 </div>
                                 {% if is_granted('ROLE_ADMIN') %}
@@ -65,7 +65,7 @@
                                     {% if event.participants|length > 0 %}
                                         <br>
                                         {% for participant in event.participants %}
-                                            <span class="event-circle-avatar">{{ participant.pseudo }}</span>{% if not loop.last %}, {% endif %}
+                                            <a href="{{ path('app_users', {'id': participant.id}) }}" class="event-circle-avatar">{{ participant.pseudo }}</a>{% if not loop.last %}, {% endif %}
                                         {% endfor %}
                                     {% endif %}
                                 </p>                        

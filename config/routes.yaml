@@ -24,6 +24,15 @@ withdraw_event:
     controller: 'App\Controller\EventController::withdraw'
     methods: ['GET']
 
+toggle_favorite:
+    path: '/user/toggle_favorite/{id}'
+    controller: 'App\Controller\UserController::toggleFavoriteProfile'
+
+delete_user_profile:
+    path: /user/delete
+    controller: App\Controller\UserController::deleteProfile
+    methods: ['POST']
+
 # mes_favoris:
 #     path: /mes-favoris
 #     controller: App\Controller\FavorisController::mesFavoris

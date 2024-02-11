@@ -93,31 +93,31 @@ class PictureService
     }
  
     public function delete(string $file, ?string $folder = '', ?int $width = 250, ?int $height = 250)
-    {
-        if($file !== 'default.webp') {
-            $success = false;
- 
-            $path = $this->params->get('images_directory') . $folder;
- 
-            $mini = $path . '/mini/' . $width . 'x' . $height . '-' . $file;
- 
-            if(file_exists($mini)) {
-                unlink($mini);
-                $success = true;
-            }
- 
-            $original = $path . '/' . $file;
- 
-            if(file_exists($original)) {
-                unlink($mini);
-                $success = true;
-            }
- 
-            return $success;
+{
+    if($file !== 'default.webp') {
+        $success = false;
+
+        $path = $this->params->get('images_directory') . $folder;
+
+        $mini = $path . '/mini/' . $width . 'x' . $height . '-' . $file;
+
+        if(file_exists($mini)) {
+            unlink($mini);
+            $success = true;
         }
- 
-        return false;
+
+        $original = $path . '/' . $file;
+
+        if(file_exists($original)) {
+            unlink($original); // Correction ici
+            $success = true;
+        }
+
+        return $success;
     }
+
+    return false;
+}
 
 
     // private $images_directory;

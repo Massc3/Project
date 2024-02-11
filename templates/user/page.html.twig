@@ -1,0 +1,86 @@
+{% extends 'profil.html.twig' %}
+
+{% block title %}Page profil{% endblock %}
+
+{% block body %}
+
+<div class="profil-container-page-profil">
+
+    <div class="profile-section">
+
+        <div class="favoris-user">
+            <h1>{{ user.pseudo }} Profil</h1>
+            <a href="{{ path('add_favorite', {'id': user.id}) }}" class="favorite-icon">
+                <i class="fa-regular fa-heart"></i>
+            </a>
+        </div>
+        
+        <div class="profil-participation-section">
+            <h3>Événements auxquels {{ user.pseudo }} participe ({{ user.participant|length }}) :</h3>
+            {% if user.participant is not empty %}
+            <ul class="profil-event-list-participed">
+                {% for event in user.participant %}
+                <div>
+                    <li class="profil-event-details-participed">
+                    {% if event.picture is not null %}
+                    <figure>
+                        <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
+                    </figure>
+                    {% endif %}                           
+                        {{ event.description }} <br> {{ event.dateDebut|date('d-m-Y') }}
+                    </li>
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="profil-no-events">Aucun événement auquel {{ user.pseudo }} participe pour le moment.</p>
+            {% endif %}
+        </div>
+
+        <div class="profil-proposed-events-section">
+            <h3>Événements proposés par {{ user.pseudo }} ({{ user.events|length }}) :</h3>
+        
+            <div class="profil-event-proposed">
+                {% if user.events is not empty %}
+                    <div class="profil-event-list">
+                        {% for event in user.events %}
+                            {% if event.dateFin >= "now" %}
+                                <div class="events-proposé">
+                                    <p class="profil-event-details">
+                                        {% if event.picture is not null %}
+                                        <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
+                                            <figure>
+                                                <img src="{{ asset('img/' ~ event.picture) }}" alt="Event Image">
+                                            </figure>
+                                        </a>
+                                        {% endif %}
+                                    </p>
+                                    <p>{{ event.description }}</p>
+                                    <p>{{ event.dateDebut|date('Y-m-d') }}</p>
+                                    {% if event.isParticipant(app.user) %}
+                                        <span>Vous participez déjà à cet événement.</span>
+                                        {# Afficher le lien "Ne plus participer" uniquement si l'utilisateur participe déjà #}
+                                        <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
+                                    {% else %}
+                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                    {% endif %}
+                                    <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                                </div>
+                            {% else %}
+                                <div class="events-proposé">
+                                    <p>{{ event.description }}</p>
+                                    <p>L'événement est passé.</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="profil-no-events">Pas d'événement proposé par {{ user.pseudo }} pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div> 
+
+</div>
+
+{% endblock %}

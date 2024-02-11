@@ -46,15 +46,14 @@ class Event
     #[ORM\Column(nullable: true)]
     private ?string $picture;
 
-    #[ORM\ManyToOne(inversedBy: 'event')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'participant')]
     private Collection $participants;
 
     #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $isAvailable = true;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -62,7 +61,6 @@ class Event
         $this->dateCreation = new DateTime();
         $this->participants = new ArrayCollection();
         $this->isAvailable = true; // Par défaut, l'événement est disponible
-
 
     }
 
@@ -214,7 +212,7 @@ class Event
      * @param UserInterface $user
      * @return bool
      */
-    public function isParticipant(UserInterface $user): bool
+    public function isParticipant(User $user): bool
     {
         return $this->participants->contains($user);
     }

@@ -5,11 +5,11 @@
 {% block body %}
 
 <div class="profil-container">
-
     <div class="profile-section">
 
         {# <h2 class="profile-title">{{ app.user.pseudo }}</h2> #}
         <h1>Mon Profil</h1>
+        
         
         <div class="profil-participation-section">
             <h3>Événements auxquels je participe ({{ app.user.participant|length }}) :</h3>
@@ -36,12 +36,12 @@
         </div>
 
         <div class="profil-proposed-events-section">
-            <h3>Mes événements proposés ({{ app.user.event|length }}) :</h3>
+            <h3>Mes événements proposés ({{ app.user.events|length }}) :</h3>
         
             <div class="profil-event-proposed">
-                {% if app.user.event is not empty %}
+                {% if app.user.events is not empty %}
                     <div class="profil-event-list">
-                        {% for event in app.user.event %}
+                        {% for event in app.user.events %}
                             {% if event.dateFin >= "now" %}
                                 <div class="events-proposé">
                                     <p class="profil-event-details">
@@ -80,22 +80,19 @@
 
         <div class="profil-favorites-section">
             <h3>Mes favoris :</h3>
-            {# {% if app.user.favoriteEvents is not empty %}
-                <ul class="event-list">
-                    {% for favoriteEvent in app.user.favoriteEvents %}
-                        <li class="event-details">
-                            <img src="{{ asset(favoriteEvent.picture) }}" alt="Event Image">
-                            {{ favoriteEvent.description }} - {{ favoriteEvent.dateDebut|date('Y-m-d') }}
-                            Ajoutez ici tout code supplémentaire pour gérer les événements favoris
-                        </li>
+
+            {% if userFavoris is not null %}
+                <ul class="favorite-users-list">
+                    {% for userFavori in userFavoris %}
+                    <a href="{{ path('view_user_profile', {'id': userFavori.id}) }}" class="event-circle-avatar">{{ userFavori.pseudo }}</a>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p class="no-events">Pas d'événement favori pour le moment.</p>
-            {% endif %} #}
+                <p>Pas d'utilisateur mis en favoris pour le moment.</p>
+            {% endif %}
         </div>
 
-    </div>
+        <a href="{{ path('delete_profile', {'id': app.user.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre profil?')">Supprimer mon profil</a>
 
 </div>
 
