@@ -13,7 +13,7 @@ title {
     text-align: center;
 }
 
- /***********test*********/
+/***********test*********/
         /* Pour l'icône de cœur non remplie */
         .favorite-icon .fa-heart {
             color: #888; /* Couleur grise par exemple */
@@ -24,6 +24,18 @@ title {
             color: red; /* Couleur rouge par exemple */
         }
 
+
+
+/*************SIGN UP****************/
+
+#sign{
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
 /***************************NAV CATEGORY**************************/
 
 #nav-constant{
@@ -83,6 +95,7 @@ title {
     text-decoration: none;
     color: black;
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 #title_base ul {
@@ -1210,6 +1223,12 @@ font-size: 1.5em;
 
 .profil-proposed-events-section figure{
     height: 200px;
+}
+
+.profil-container-page-profil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 /**********************************PROFIL***********************************************/
 

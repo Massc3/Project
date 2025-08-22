@@ -45,6 +45,7 @@
                             {% if event.dateFin >= "now" %}
                                 <div class="events-proposé">
                                     <p class="profil-event-details">
+                                        <p class="event-participants"> Le nombre de participant à l'event : {{ event.participants|length }} / {{ event.note }} </p>
                                         {% if event.picture is not null %}
                                         <a href="{{ path('afficherDetail_event', {'id': event.id}) }}">
                                             <figure>
@@ -54,14 +55,15 @@
                                         {% endif %}
                                     </p>
                                     <p>{{ event.description }}</p>
-                                    <p>{{ event.dateDebut|date('Y-m-d') }}</p>
+                                    <p>{{ event.dateDebut|date('d-m-Y') }}</p>
                                     {% if event.isParticipant(app.user) %}
                                         <span>Vous participez déjà à cet événement.</span>
-                                    {% else %}
-                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                        {# Afficher le lien "Ne plus participer" uniquement si l'utilisateur participe déjà #}
                                         <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
-                                        <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
+                                    {% else %}
+                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je veux participer</a>
                                     {% endif %}
+                                    <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
                                 </div>
                             {% else %}
                                 <div class="events-proposé">

@@ -62,7 +62,7 @@
                                         {# Afficher le lien "Ne plus participer" uniquement si l'utilisateur participe déjà #}
                                         <a href="{{ path('withdraw_event', {'id': event.id}) }}" class="event-plus">Ne plus participer</a>
                                     {% else %}
-                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                        <a href="{{ path('participate_event', {'id': event.id}) }}">Je veux participer</a>
                                     {% endif %}
                                     <a href="{{ path('share_event', {'id': event.id}) }}" title="Partager l'événement"><i class="fa-solid fa-share-nodes"></i></a>
                                 </div>

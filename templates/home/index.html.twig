@@ -87,7 +87,7 @@
                                             <span>Vous participez déjà à cet événement. </span>
                                             <a href="{{ path('withdraw_event', {'id': event.id}) }}">Je ne participe plus</a>
                                         {% else %}
-                                            <a href="{{ path('participate_event', {'id': event.id}) }}">Je participe</a>
+                                            <a href="{{ path('participate_event', {'id': event.id}) }}">Je veux participer</a>
                                         {% endif %}
                                     {% else %}
                                         <strong><p class="event-complet">Complet</p></strong>

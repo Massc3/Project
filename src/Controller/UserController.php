@@ -164,20 +164,5 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    // #[Route('/user/delete', name: 'delete_user_profile')]
-    // public function deleteProfile(Request $request): Response
-    // {
-    //     // Récupérer l'EntityManager
-    // $entityManager = $this->getUser()->getManager();
-
-    // // Récupérer l'utilisateur actuellement connecté
-    // $user = $this->getUser(); 
-
-    // // Supprimer l'utilisateur de la base de données
-    // $entityManager->remove($user);
-    // $entityManager->flush();
-
-    // // Rediriger vers une page de confirmation ou autre
-    // return $this->redirectToRoute('app_register');
-    // }
+    
 }
